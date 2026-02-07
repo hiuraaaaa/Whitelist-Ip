@@ -77,6 +77,7 @@
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
             padding: 60px 50px;
+            border-radius: 8px;
             box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
             text-align: center;
             max-width: 480px;
@@ -100,6 +101,7 @@
             width: 80px;
             height: 80px;
             background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -133,6 +135,7 @@
             width: 100%;
             padding: 18px 20px;
             border: 2px solid #e0e0e0;
+            border-radius: 6px;
             font-size: 1em;
             font-family: 'Inter', sans-serif;
             font-weight: 500;
@@ -153,6 +156,7 @@
             background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
             color: white;
             border: none;
+            border-radius: 6px;
             font-size: 1em;
             font-weight: 700;
             cursor: pointer;
@@ -190,17 +194,12 @@
             backdrop-filter: blur(20px);
             padding: 20px 25px;
             margin-bottom: 25px;
+            border-radius: 8px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.8);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            transition: none !important;
-        }
-
-        .dashboard-header:hover {
-            transform: none !important;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05) !important;
         }
 
         .header-left {
@@ -236,6 +235,7 @@
             background: linear-gradient(135deg, #ff6b9d 0%, #ff3d71 100%);
             color: white;
             border: none;
+            border-radius: 6px;
             font-size: 1.1em;
             font-weight: 700;
             cursor: pointer;
@@ -244,7 +244,6 @@
             align-items: center;
             justify-content: center;
             box-shadow: 0 4px 15px rgba(255, 107, 157, 0.3);
-            border-radius: 0;
         }
 
         .logout-icon:hover {
@@ -252,7 +251,6 @@
             box-shadow: 0 8px 20px rgba(255, 107, 157, 0.4);
         }
 
-        /* Logout Tooltip (akan muncul saat hover) */
         .logout-tooltip {
             position: absolute;
             top: 100%;
@@ -263,12 +261,12 @@
             color: white;
             font-size: 0.8em;
             font-weight: 600;
+            border-radius: 5px;
             white-space: nowrap;
             opacity: 0;
             visibility: hidden;
             transition: all 0.3s;
             z-index: 100;
-            border-radius: 0;
         }
 
         .logout-container:hover .logout-tooltip {
@@ -299,14 +297,9 @@
             .main-cards {
                 grid-template-columns: 1fr;
             }
-            
-            .content-cards {
-                grid-template-columns: 1fr;
-            }
         }
 
         @media (max-width: 768px) {
-            .main-cards,
             .content-cards {
                 grid-template-columns: 1fr;
             }
@@ -317,6 +310,7 @@
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
             padding: 25px;
+            border-radius: 8px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
             border: 1px solid rgba(255, 255, 255, 0.8);
             transition: transform 0.3s;
@@ -337,6 +331,7 @@
         .card-icon {
             width: 45px;
             height: 45px;
+            border-radius: 6px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -377,6 +372,7 @@
         .stat-box {
             background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
             padding: 20px;
+            border-radius: 8px;
             text-align: center;
             color: white;
             transition: transform 0.3s;
@@ -428,6 +424,7 @@
             padding: 20px;
             background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
             margin: 0;
+            border-radius: 6px;
             border: 1px solid rgba(0, 0, 0, 0.05);
         }
 
@@ -453,6 +450,7 @@
             bottom: 0;
             background-color: #ccc;
             transition: 0.4s;
+            border-radius: 32px;
         }
 
         .slider:before {
@@ -464,6 +462,7 @@
             bottom: 4px;
             background-color: white;
             transition: 0.4s;
+            border-radius: 50%;
         }
 
         input:checked + .slider {
@@ -496,28 +495,16 @@
         .input-group {
             display: flex;
             gap: 12px;
-            align-items: center;
-        }
-
-        @media (max-width: 768px) {
-            .input-group {
-                flex-direction: column;
-            }
-            
-            .input-group input {
-                width: 100%;
-            }
-            
-            .btn-primary {
-                width: 100%;
-            }
+            align-items: stretch;
+            flex-wrap: wrap;
         }
 
         input[type="text"] {
             flex: 1;
-            min-width: 120px;
+            min-width: 150px;
             padding: 14px 18px;
             border: 2px solid #e0e0e0;
+            border-radius: 6px;
             font-size: 0.95em;
             font-family: 'Inter', sans-serif;
             font-weight: 500;
@@ -536,12 +523,14 @@
             background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
             color: white;
             border: none;
+            border-radius: 6px;
             font-size: 0.95em;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.3s;
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 8px;
             white-space: nowrap;
             box-shadow: 0 4px 15px rgba(240, 147, 251, 0.3);
@@ -563,6 +552,7 @@
             overflow-y: auto;
             margin: 0;
             border: 1px solid rgba(0, 0, 0, 0.05);
+            border-radius: 6px;
         }
 
         .ip-item {
@@ -575,8 +565,15 @@
             background: white;
         }
 
+        .ip-item:first-child {
+            border-top-left-radius: 6px;
+            border-top-right-radius: 6px;
+        }
+
         .ip-item:last-child {
             border-bottom: none;
+            border-bottom-left-radius: 6px;
+            border-bottom-right-radius: 6px;
         }
 
         .ip-item:hover {
@@ -618,6 +615,7 @@
             background: linear-gradient(135deg, #ff6b9d 0%, #ff3d71 100%);
             color: white;
             border: none;
+            border-radius: 6px;
             font-size: 0.85em;
             font-weight: 700;
             cursor: pointer;
@@ -646,6 +644,7 @@
             overflow-y: auto;
             margin: 0;
             border: 1px solid rgba(0, 0, 0, 0.05);
+            border-radius: 6px;
         }
 
         .log-item {
@@ -653,6 +652,7 @@
             border-left: 4px solid #f093fb;
             background: #fef5ff;
             margin-bottom: 10px;
+            border-radius: 6px;
             transition: all 0.3s;
         }
 
@@ -685,6 +685,7 @@
             align-items: center;
             gap: 5px;
             padding: 4px 10px;
+            border-radius: 5px;
             font-size: 0.8em;
             font-weight: 700;
             margin-left: 8px;
@@ -727,13 +728,11 @@
         .alert {
             padding: 16px 20px;
             margin-bottom: 20px;
+            border-radius: 6px;
             display: none;
             font-weight: 600;
             animation: slideDown 0.3s ease;
             border: 2px solid transparent;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.8);
         }
 
         .alert.success {
@@ -769,6 +768,7 @@
             padding: 40px 20px;
             color: #ccc;
             background: white;
+            border-radius: 6px;
         }
 
         .empty-state svg {
@@ -806,6 +806,7 @@
         .modal {
             background: white;
             padding: 50px;
+            border-radius: 8px;
             max-width: 500px;
             width: 90%;
             text-align: center;
@@ -829,6 +830,7 @@
             width: 80px;
             height: 80px;
             background: linear-gradient(135deg, #ff6b9d 0%, #ff3d71 100%);
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -862,6 +864,7 @@
             color: white;
             padding: 16px 40px;
             border: none;
+            border-radius: 6px;
             font-size: 1em;
             font-weight: 700;
             cursor: pointer;
@@ -888,6 +891,7 @@
         .ip-list::-webkit-scrollbar-thumb,
         .logs-list::-webkit-scrollbar-thumb {
             background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            border-radius: 3px;
         }
 
         .ip-list::-webkit-scrollbar-thumb:hover,
@@ -919,27 +923,28 @@
             }
             
             .dashboard-header {
-                flex-direction: row;
-                align-items: center;
-                gap: 15px;
                 padding: 15px 20px;
             }
             
             .header-left h1 {
                 font-size: 1.4em;
             }
+
+            .input-group {
+                flex-direction: column;
+            }
+            
+            .input-group input {
+                width: 100%;
+            }
+            
+            .btn-primary {
+                width: 100%;
+            }
         }
 
         @media (max-width: 480px) {
             body {
-                padding: 15px;
-            }
-            
-            .container {
-                padding: 0;
-            }
-            
-            .dashboard-header {
                 padding: 15px;
             }
             
@@ -1001,7 +1006,7 @@
 
             <!-- Dashboard Layout -->
             <div class="dashboard-layout">
-                <!-- Baris pertama: Statistics dan Settings -->
+                <!-- Main Cards Row -->
                 <div class="main-cards">
                     <!-- Statistics Card -->
                     <div class="card">
@@ -1066,7 +1071,7 @@
                     </div>
                 </div>
 
-                <!-- Baris terakhir: IP List dan Activity Logs -->
+                <!-- Content Cards Row -->
                 <div class="content-cards">
                     <!-- IP List Card -->
                     <div class="card">
@@ -1116,7 +1121,6 @@
         </div>
     </div>
 
-    <!-- JavaScript tetap sama persis seperti yang Anda miliki -->
     <script>
         let currentAdminKey = '';
         let failedAttempts = 0;
@@ -1128,6 +1132,41 @@
             { title: "Really?", message: "Are you sure you're the admin? 😅" },
             { title: "Come On!", message: "This is getting embarrassing now... 😬" }
         ];
+
+        // ============= SESSION PERSISTENCE =============
+        // Load admin key from localStorage on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedAdminKey = localStorage.getItem('adminKey');
+            if (savedAdminKey) {
+                currentAdminKey = savedAdminKey;
+                autoLogin();
+            }
+        });
+
+        async function autoLogin() {
+            try {
+                const response = await fetch('/ips/list', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ adminKey: currentAdminKey })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    document.getElementById('loginPage').style.display = 'none';
+                    document.getElementById('dashboardPage').style.display = 'block';
+                    loadData(data);
+                } else {
+                    // Invalid session, clear it
+                    localStorage.removeItem('adminKey');
+                    currentAdminKey = '';
+                }
+            } catch (error) {
+                localStorage.removeItem('adminKey');
+                currentAdminKey = '';
+            }
+        }
 
         function showSassyError() {
             const modal = document.getElementById('sassyModal');
@@ -1163,8 +1202,11 @@
         }
 
         function logout() {
+            // Clear session
+            localStorage.removeItem('adminKey');
             currentAdminKey = '';
             failedAttempts = 0;
+            
             document.getElementById('dashboardPage').style.display = 'none';
             document.getElementById('loginPage').style.display = 'flex';
             document.getElementById('adminKey').value = '';
@@ -1189,6 +1231,8 @@
                 const data = await response.json();
 
                 if (data.success) {
+                    // Save admin key to localStorage
+                    localStorage.setItem('adminKey', adminKey);
                     currentAdminKey = adminKey;
                     failedAttempts = 0;
                     
