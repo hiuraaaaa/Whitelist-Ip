@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IP Whitelist Dashboard - Vercel</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 5px 15px;
+            border-radius: 20px;
+            margin-top: 10px;
+            font-size: 0.9em;
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .card h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .stat-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .stat-box h3 {
+            font-size: 2em;
+            margin-bottom: 5px;
+        }
+
+        .stat-box p {
+            opacity: 0.9;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border 0.3s;
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 8px 15px;
+            font-size: 0.9em;
+        }
+
+        .btn-danger:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(245, 87, 108, 0.4);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(79, 172, 254, 0.4);
+        }
+
+        .btn-warning {
+            background: linear-gradient(135deg, #ffa751 0%, #ffe259 100%);
+            color: #333;
+        }
+
+        .btn-warning:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 167, 81, 0.4);
+        }
+
+        .ip-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .ip-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid #f0f0f0;
+            transition: background 0.3s;
+        }
+
+        .ip-item:hover {
+            background: #f9f9f9;
+        }
+
+        .ip-item:last-child {
+            border-bottom: none;
+        }
+
+        .ip-info {
+            flex: 1;
+        }
+
+        .ip-address {
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .ip-meta {
+            font-size: 0.9em;
+            color: #888;
+        }
+
+        .logs-list {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .log-item {
+            padding: 10px;
+            border-left: 4px solid #667eea;
+            background: #f9f9f9;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+
+        .log-item.blocked {
+            border-left-color: #f5576c;
+        }
+
+        .log-item.success {
+            border-left-color: #00f2fe;
+        }
+
+        .log-time {
+            font-size: 0.85em;
+            color: #888;
+        }
+
+        .log-action {
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            background: #f9f9f9;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 60px;
+            height: 30px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 30px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 22px;
+            width: 22px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(30px);
+        }
+
+        .alert {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            display: none;
+        }
+
+        .alert.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .alert.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .alert.show {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: #888;
+        }
+
+        .empty-state svg {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 15px;
+            opacity: 0.5;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .input-group {
+                flex-direction: column;
+            }
+
+            input[type="text"],
+            input[type="password"] {
+                width: 100%;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔒 IP Whitelist Dashboard</h1>
+            <p>Manage your IP whitelist with Vercel + Supabase</p>
+            <span class="badge">Powered by Vercel & Supabase</span>
+        </div>
+
+        <div id="alert" class="alert"></div>
+
+        <!-- Stats -->
+        <div class="card">
+            <h2>📊 Statistics</h2>
+            <div class="stats">
+                <div class="stat-box">
+                    <h3 id="totalIps">0</h3>
+                    <p>Total IPs</p>
+                </div>
+                <div class="stat-box">
+                    <h3 id="allowedChecks">0</h3>
+                    <p>Allowed Checks</p>
+                </div>
+                <div class="stat-box">
+                    <h3 id="blockedChecks">0</h3>
+                    <p>Blocked Checks</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Admin Auth -->
+        <div class="card">
+            <h2>🔑 Admin Authentication</h2>
+            <div class="input-group">
+                <input type="password" id="adminKey" placeholder="Enter Admin Key">
+                <button class="btn-primary" onclick="authenticate()">Authenticate</button>
+            </div>
+        </div>
+
+        <div id="adminPanel" style="display:none;">
+            <!-- Allow All Toggle -->
+            <div class="card">
+                <h2>🌐 Global Settings</h2>
+                <div class="toggle-container">
+                    <div class="toggle-switch">
+                        <input type="checkbox" id="allowAllToggle" onchange="toggleAllowAll()">
+                        <span class="slider"></span>
+                    </div>
+                    <div>
+                        <strong>Allow All IPs</strong>
+                        <p style="font-size: 0.9em; color: #888; margin-top: 5px;">
+                            When enabled, all IPs will be allowed regardless of whitelist
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add IP -->
+            <div class="card">
+                <h2>➕ Add IP Address</h2>
+                <div class="input-group">
+                    <input type="text" id="newIp" placeholder="Enter IP Address (e.g., 192.168.1.1)">
+                    <input type="text" id="ipNotes" placeholder="Notes (optional)">
+                    <button class="btn-primary" onclick="addIp()">Add IP</button>
+                </div>
+            </div>
+
+            <!-- IP List -->
+            <div class="card">
+                <h2>📋 Whitelisted IPs</h2>
+                <div class="ip-list" id="ipList">
+                    <div class="empty-state">
+                        <p>No IPs in whitelist yet</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Logs -->
+            <div class="card">
+                <h2>📝 Recent Activity Logs</h2>
+                <div class="logs-list" id="logsList">
+                    <div class="empty-state">
+                        <p>No activity logs yet</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentAdminKey = '';
+
+        function showAlert(message, type = 'success') {
+            const alert = document.getElementById('alert');
+            alert.className = `alert ${type} show`;
+            alert.textContent = message;
+            setTimeout(() => {
+                alert.classList.remove('show');
+            }, 3000);
+        }
+
+        async function authenticate() {
+            const adminKey = document.getElementById('adminKey').value.trim();
+            
+            if (!adminKey) {
+                showAlert('Please enter admin key', 'error');
+                return;
+            }
+
+            try {
+                const response = await fetch('/ips/list', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ adminKey })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    currentAdminKey = adminKey;
+                    document.getElementById('adminPanel').style.display = 'block';
+                    document.getElementById('adminKey').value = '';
+                    showAlert('Authentication successful!', 'success');
+                    loadData(data);
+                } else {
+                    showAlert('Invalid admin key', 'error');
+                }
+            } catch (error) {
+                showAlert('Error authenticating: ' + error.message, 'error');
+            }
+        }
+
+        async function loadData(data = null) {
+            if (!currentAdminKey) return;
+
+            try {
+                if (!data) {
+                    const response = await fetch('/ips/list', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ adminKey: currentAdminKey })
+                    });
+                    data = await response.json();
+                }
+
+                if (!data.success) {
+                    showAlert('Error loading data', 'error');
+                    return;
+                }
+
+                // Update stats
+                document.getElementById('totalIps').textContent = data.total || 0;
+                
+                const allowedCount = (data.logs || []).filter(log => log.status === 'ALLOWED').length;
+                const blockedCount = (data.logs || []).filter(log => log.status === 'BLOCKED').length;
+                
+                document.getElementById('allowedChecks').textContent = allowedCount;
+                document.getElementById('blockedChecks').textContent = blockedCount;
+
+                // Update allow all toggle
+                document.getElementById('allowAllToggle').checked = data.allow_all || false;
+
+                // Update IP list
+                const ipListDiv = document.getElementById('ipList');
+                if (data.ip_details && data.ip_details.length > 0) {
+                    ipListDiv.innerHTML = data.ip_details.map(ip => `
+                        <div class="ip-item">
+                            <div class="ip-info">
+                                <div class="ip-address">${ip.ip_address}</div>
+                                <div class="ip-meta">
+                                    Added: ${new Date(ip.added_at).toLocaleString()}
+                                    ${ip.notes ? `<br>Notes: ${ip.notes}` : ''}
+                                </div>
+                            </div>
+                            <button class="btn-danger" onclick="removeIp('${ip.ip_address}')">Remove</button>
+                        </div>
+                    `).join('');
+                } else {
+                    ipListDiv.innerHTML = '<div class="empty-state"><p>No IPs in whitelist yet</p></div>';
+                }
+
+                // Update logs
+                const logsDiv = document.getElementById('logsList');
+                if (data.logs && data.logs.length > 0) {
+                    logsDiv.innerHTML = data.logs.slice(0, 20).map(log => `
+                        <div class="log-item ${log.status === 'BLOCKED' ? 'blocked' : 'success'}">
+                            <span class="log-action">${log.action}</span> - 
+                            ${log.ip_address} - 
+                            <span style="color: ${log.status === 'ALLOWED' || log.status === 'ALLOWED_ALL' ? '#00f2fe' : '#f5576c'}">
+                                ${log.status}
+                            </span>
+                            <br>
+                            <span class="log-time">${new Date(log.created_at).toLocaleString()}</span>
+                        </div>
+                    `).join('');
+                } else {
+                    logsDiv.innerHTML = '<div class="empty-state"><p>No activity logs yet</p></div>';
+                }
+
+            } catch (error) {
+                showAlert('Error loading data: ' + error.message, 'error');
+            }
+        }
+
+        async function addIp() {
+            const ipAddress = document.getElementById('newIp').value.trim();
+            const notes = document.getElementById('ipNotes').value.trim();
+
+            if (!ipAddress) {
+                showAlert('Please enter an IP address', 'error');
+                return;
+            }
+
+            // Basic IP validation
+            const ipRegex = /^(\d{1,3}\.){3}\d{1,3}$/;
+            if (!ipRegex.test(ipAddress)) {
+                showAlert('Invalid IP address format', 'error');
+                return;
+            }
+
+            try {
+                const response = await fetch('/ips/add', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        ipAddress, 
+                        adminKey: currentAdminKey,
+                        notes
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    showAlert(`IP ${ipAddress} added successfully!`, 'success');
+                    document.getElementById('newIp').value = '';
+                    document.getElementById('ipNotes').value = '';
+                    loadData();
+                } else {
+                    showAlert(data.message || 'Error adding IP', 'error');
+                }
+            } catch (error) {
+                showAlert('Error adding IP: ' + error.message, 'error');
+            }
+        }
+
+        async function removeIp(ipAddress) {
+            if (!confirm(`Are you sure you want to remove ${ipAddress}?`)) {
+                return;
+            }
+
+            try {
+                const response = await fetch('/ips/remove', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        ipAddress, 
+                        adminKey: currentAdminKey 
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    showAlert(`IP ${ipAddress} removed successfully!`, 'success');
+                    loadData();
+                } else {
+                    showAlert(data.message || 'Error removing IP', 'error');
+                }
+            } catch (error) {
+                showAlert('Error removing IP: ' + error.message, 'error');
+            }
+        }
+
+        async function toggleAllowAll() {
+            const allowAll = document.getElementById('allowAllToggle').checked;
+
+            try {
+                const response = await fetch('/ips/toggle-all', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        allowAll, 
+                        adminKey: currentAdminKey 
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    showAlert(
+                        `Allow all ${allowAll ? 'enabled' : 'disabled'} successfully!`, 
+                        'success'
+                    );
+                    loadData();
+                } else {
+                    showAlert(data.message || 'Error toggling allow all', 'error');
+                    document.getElementById('allowAllToggle').checked = !allowAll;
+                }
+            } catch (error) {
+                showAlert('Error toggling allow all: ' + error.message, 'error');
+                document.getElementById('allowAllToggle').checked = !allowAll;
+            }
+        }
+
+        // Auto refresh data setiap 30 detik
+        setInterval(() => {
+            if (currentAdminKey) {
+                loadData();
+            }
+        }, 30000);
+
+        // Enter key support
+        document.getElementById('adminKey').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') authenticate();
+        });
+
+        document.getElementById('newIp').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') addIp();
+        });
+    </script>
+</body>
+</html>
