@@ -1,0 +1,20 @@
+{
+  "rewrites": [
+    { "source": "/", "destination": "/public/dashboard.html" },
+    { "source": "/ips/check", "destination": "/api/check" },
+    { "source": "/ips/add", "destination": "/api/add" },
+    { "source": "/ips/remove", "destination": "/api/remove" },
+    { "source": "/ips/list", "destination": "/api/list" },
+    { "source": "/ips/toggle-all", "destination": "/api/toggle-all" }
+  ],
+  "headers": [
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        { "key": "Access-Control-Allow-Origin", "value": "*" },
+        { "key": "Access-Control-Allow-Methods", "value": "GET, POST, OPTIONS" },
+        { "key": "Access-Control-Allow-Headers", "value": "Content-Type" }
+      ]
+    }
+  ]
+}
