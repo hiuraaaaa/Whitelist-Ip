@@ -6,27 +6,8 @@
     <title>IP Whitelist Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            --success-gradient: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
-            --danger-gradient: linear-gradient(135deg, #ff6b9d 0%, #ff3d71 100%);
-            --info-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            --card-bg: rgba(255, 255, 255, 0.98);
-            --shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
-            --radius-lg: 20px;
-            --radius-md: 15px;
-            --radius-sm: 12px;
-            --spacing-xs: 8px;
-            --spacing-sm: 12px;
-            --spacing-md: 16px;
-            --spacing-lg: 24px;
-            --spacing-xl: 32px;
-            --spacing-2xl: 48px;
-        }
-
         * {
             margin: 0;
             padding: 0;
@@ -35,15 +16,32 @@
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: linear-gradient(135deg, #f5f7ff 0%, #f0f4ff 100%);
+            background: linear-gradient(135deg, #e0c3fc 0%, #fbc2eb 50%, #d4a5e8 100%);
             min-height: 100vh;
-            color: #333;
-            line-height: 1.6;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
         }
 
-        .app-container {
-            min-height: 100vh;
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(240, 195, 252, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(251, 194, 235, 0.3) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
             position: relative;
+            z-index: 1;
         }
 
         /* Login Page */
@@ -52,36 +50,22 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            padding: var(--spacing-lg);
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            position: relative;
-            overflow: hidden;
-        }
-
-        #loginPage::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+            padding: 20px;
         }
 
         .login-card {
-            background: var(--card-bg);
-            border-radius: var(--radius-lg);
-            padding: var(--spacing-2xl) var(--spacing-xl);
-            box-shadow: var(--shadow);
-            width: 100%;
-            max-width: 420px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 60px 50px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
             text-align: center;
-            z-index: 1;
-            backdrop-filter: blur(10px);
-            animation: slideUp 0.6s ease-out;
+            max-width: 480px;
+            width: 100%;
+            animation: fadeInUp 0.6s ease-out;
         }
 
-        @keyframes slideUp {
+        @keyframes fadeInUp {
             from {
                 opacity: 0;
                 transform: translateY(30px);
@@ -92,241 +76,270 @@
             }
         }
 
-        .login-header {
-            margin-bottom: var(--spacing-xl);
-        }
-
         .login-icon {
             width: 80px;
             height: 80px;
-            background: var(--primary-gradient);
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
             border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto var(--spacing-lg);
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+            margin: 0 auto 25px;
         }
 
         .login-icon svg {
-            width: 36px;
-            height: 36px;
+            width: 40px;
+            height: 40px;
             color: white;
         }
 
-        .login-title {
-            font-size: 28px;
+        .login-card h1 {
+            font-size: 2.2em;
             font-weight: 800;
-            color: #2d3748;
-            margin-bottom: var(--spacing-xs);
+            color: #333;
+            margin-bottom: 10px;
             letter-spacing: -0.5px;
         }
 
-        .login-subtitle {
-            font-size: 15px;
-            color: #718096;
+        .login-card p {
+            font-size: 1em;
+            color: #888;
+            margin-bottom: 35px;
             font-weight: 500;
         }
 
-        .form-group {
-            margin-bottom: var(--spacing-lg);
-        }
-
-        .input-field {
+        .login-input {
             width: 100%;
-            padding: 16px 20px;
-            border: 2px solid #e2e8f0;
-            border-radius: var(--radius-md);
-            font-size: 15px;
+            padding: 18px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 15px;
+            font-size: 1em;
             font-family: 'Inter', sans-serif;
             font-weight: 500;
-            color: #2d3748;
-            transition: all 0.3s ease;
-            background: white;
+            margin-bottom: 20px;
+            transition: all 0.3s;
         }
 
-        .input-field:focus {
+        .login-input:focus {
             outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.15);
+            border-color: #f093fb;
+            box-shadow: 0 0 0 4px rgba(240, 147, 251, 0.1);
         }
 
-        .input-field::placeholder {
-            color: #a0aec0;
-        }
-
-        .btn {
-            display: inline-flex;
+        .btn-login {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            border: none;
+            border-radius: 15px;
+            font-size: 1em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
-            padding: 16px 28px;
-            border: none;
-            border-radius: var(--radius-md);
-            font-size: 15px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-family: 'Inter', sans-serif;
         }
 
-        .btn-primary {
-            background: var(--primary-gradient);
-            color: white;
-            width: 100%;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
-        }
-
-        .btn-primary:hover {
+        .btn-login:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 10px 25px rgba(240, 147, 251, 0.4);
         }
 
-        .btn-primary:active {
-            transform: translateY(0);
+        .btn-login svg {
+            width: 20px;
+            height: 20px;
         }
 
-        .btn-danger {
-            background: var(--danger-gradient);
-            color: white;
-            box-shadow: 0 4px 15px rgba(255, 107, 157, 0.3);
-        }
-
-        .btn-danger:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(255, 107, 157, 0.4);
-        }
-
-        /* Dashboard Page */
+        /* Dashboard */
         #dashboardPage {
-            min-height: 100vh;
             animation: fadeIn 0.5s ease-out;
         }
 
-        .dashboard-header {
-            background: white;
-            padding: var(--spacing-lg) var(--spacing-xl);
-            border-bottom: 1px solid #e2e8f0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
-        .header-content {
-            max-width: 1400px;
-            margin: 0 auto;
+        /* Header yang tidak berubah saat diklik */
+        .dashboard-header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            padding: 25px 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            gap: var(--spacing-lg);
+            min-height: auto;
+            transition: none !important;
+        }
+
+        .dashboard-header:hover {
+            transform: none !important;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1) !important;
         }
 
         .header-left {
             display: flex;
             align-items: center;
-            gap: var(--spacing-md);
+            gap: 15px;
         }
 
-        .logo {
-            width: 48px;
-            height: 48px;
-            background: var(--primary-gradient);
-            border-radius: 12px;
+        .header-left h1 {
+            font-size: 1.8em;
+            font-weight: 800;
+            color: #333;
             display: flex;
             align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            gap: 12px;
+            margin: 0;
         }
 
-        .logo svg {
-            width: 24px;
-            height: 24px;
-            color: white;
+        .header-left h1 svg {
+            width: 32px;
+            height: 32px;
+            color: #f093fb;
         }
 
-        .header-title h1 {
-            font-size: 24px;
-            font-weight: 800;
-            color: #2d3748;
-            margin-bottom: 4px;
-        }
-
-        .header-title p {
-            font-size: 14px;
-            color: #718096;
+        .header-left p {
+            font-size: 0.9em;
+            color: #888;
             font-weight: 500;
+            margin-top: 4px;
         }
 
-        .main-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: var(--spacing-xl);
+        .btn-logout {
+            background: linear-gradient(135deg, #ff6b9d 0%, #ff3d71 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-size: 0.9em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
         }
 
-        /* Layout Grid */
-        .dashboard-grid {
+        .btn-logout:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 107, 157, 0.4);
+        }
+
+        .btn-logout svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* Layout Grid yang lebih rapi */
+        .dashboard-layout {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 25px;
+        }
+
+        .main-cards {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 25px;
+        }
+
+        .content-cards {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: var(--spacing-lg);
-            margin-bottom: var(--spacing-lg);
+            gap: 25px;
         }
 
-        .dashboard-grid.full-width {
-            grid-template-columns: 1fr;
-        }
-
-        @media (max-width: 1024px) {
-            .dashboard-grid {
+        @media (max-width: 1100px) {
+            .main-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .content-cards {
                 grid-template-columns: 1fr;
             }
         }
 
-        /* Cards */
+        @media (max-width: 768px) {
+            .main-cards,
+            .content-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .dashboard-header {
+                flex-direction: row;
+                gap: 15px;
+                text-align: left;
+            }
+            
+            .header-left h1 {
+                font-size: 1.5em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .dashboard-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            
+            .btn-logout {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        /* Cards - tanpa efek hover berlebihan */
         .card {
-            background: var(--card-bg);
-            border-radius: var(--radius-lg);
-            padding: var(--spacing-xl);
-            box-shadow: var(--shadow);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            min-height: 0;
         }
 
         .card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.12);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
         }
 
         .card-header {
             display: flex;
             align-items: center;
-            gap: var(--spacing-md);
-            margin-bottom: var(--spacing-lg);
+            gap: 12px;
+            margin-bottom: 20px;
         }
 
         .card-icon {
-            width: 56px;
-            height: 56px;
-            border-radius: var(--radius-md);
+            width: 45px;
+            height: 45px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
         }
 
-        .card-icon.primary {
-            background: var(--primary-gradient);
+        .card-icon.purple {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
         }
 
-        .card-icon.secondary {
-            background: var(--secondary-gradient);
+        .card-icon.blue {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
         }
 
-        .card-icon.success {
-            background: var(--success-gradient);
-        }
-
-        .card-icon.info {
-            background: var(--info-gradient);
+        .card-icon.green {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
         }
 
         .card-icon svg {
@@ -335,77 +348,74 @@
             color: white;
         }
 
-        .card-title {
-            font-size: 18px;
+        .card-header h2 {
+            font-size: 1.3em;
             font-weight: 700;
-            color: #2d3748;
-            margin-bottom: 4px;
+            color: #333;
+            margin: 0;
         }
 
-        .card-subtitle {
-            font-size: 14px;
-            color: #718096;
-            font-weight: 500;
-        }
-
-        /* Statistics Cards */
+        /* Stats Grid */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: var(--spacing-md);
-            margin-top: var(--spacing-md);
+            gap: 15px;
         }
 
-        @media (max-width: 768px) {
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .stat-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: var(--spacing-lg);
-            border-radius: var(--radius-md);
+        .stat-box {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            padding: 20px;
+            border-radius: 20px;
             text-align: center;
             color: white;
+            transition: all 0.3s;
+            min-height: 0;
         }
 
-        .stat-card:nth-child(2) {
-            background: var(--info-gradient);
+        .stat-box:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(240, 147, 251, 0.4);
         }
 
-        .stat-card:nth-child(3) {
-            background: var(--success-gradient);
+        .stat-box:nth-child(2) {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
         }
 
-        .stat-value {
-            font-size: 32px;
+        .stat-box:nth-child(2):hover {
+            box-shadow: 0 10px 25px rgba(79, 172, 254, 0.4);
+        }
+
+        .stat-box:nth-child(3) {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+
+        .stat-box:nth-child(3):hover {
+            box-shadow: 0 10px 25px rgba(67, 233, 123, 0.4);
+        }
+
+        .stat-box h3 {
+            font-size: 2.2em;
             font-weight: 800;
-            margin-bottom: var(--spacing-xs);
+            margin-bottom: 5px;
             line-height: 1;
         }
 
-        .stat-label {
-            font-size: 14px;
+        .stat-box p {
+            font-size: 0.85em;
             font-weight: 600;
             opacity: 0.95;
-            letter-spacing: 0.5px;
+            margin: 0;
         }
 
-        /* Settings Card */
-        .settings-card {
-            background: #f8fafc;
-            border: 2px solid #e2e8f0;
-        }
-
-        .toggle-wrapper {
+        /* Toggle - lebih rapi */
+        .toggle-container {
             display: flex;
             align-items: center;
-            gap: var(--spacing-lg);
-            padding: var(--spacing-lg);
-            background: white;
-            border-radius: var(--radius-md);
-            border: 2px solid #e2e8f0;
+            gap: 15px;
+            padding: 20px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 15px;
+            margin: 0;
         }
 
         .toggle-switch {
@@ -428,7 +438,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-color: #cbd5e0;
+            background-color: #ccc;
             transition: 0.4s;
             border-radius: 34px;
         }
@@ -443,11 +453,10 @@
             background-color: white;
             transition: 0.4s;
             border-radius: 50%;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         }
 
         input:checked + .slider {
-            background: var(--secondary-gradient);
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
         }
 
         input:checked + .slider:before {
@@ -460,77 +469,106 @@
 
         .toggle-label strong {
             display: block;
-            font-size: 16px;
+            font-size: 1em;
             font-weight: 700;
-            color: #2d3748;
+            color: #333;
             margin-bottom: 4px;
         }
 
         .toggle-label span {
-            font-size: 14px;
-            color: #718096;
+            font-size: 0.85em;
+            color: #888;
             font-weight: 500;
-            line-height: 1.5;
         }
 
-        /* Input Group */
+        /* Input Group - lebih kompak */
         .input-group {
-            display: grid;
-            grid-template-columns: 1fr 1fr auto;
-            gap: var(--spacing-md);
-            align-items: start;
+            display: flex;
+            gap: 12px;
+            align-items: center;
         }
 
         @media (max-width: 768px) {
             .input-group {
-                grid-template-columns: 1fr;
+                flex-direction: column;
+            }
+            
+            .input-group input {
+                width: 100%;
+            }
+            
+            .btn-primary {
+                width: 100%;
             }
         }
 
-        .form-control {
-            padding: 14px 16px;
-            border: 2px solid #e2e8f0;
-            border-radius: var(--radius-md);
-            font-size: 14px;
+        input[type="text"] {
+            flex: 1;
+            min-width: 120px;
+            padding: 14px 18px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 0.95em;
             font-family: 'Inter', sans-serif;
             font-weight: 500;
-            color: #2d3748;
-            transition: all 0.3s ease;
-            background: white;
+            transition: all 0.3s;
         }
 
-        .form-control:focus {
+        input[type="text"]:focus {
             outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.15);
+            border-color: #f093fb;
+            box-shadow: 0 0 0 4px rgba(240, 147, 251, 0.1);
         }
 
-        .form-control::placeholder {
-            color: #a0aec0;
+        .btn-primary {
+            padding: 14px 28px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 0.95em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
         }
 
-        /* IP List */
-        .ip-list-container {
-            max-height: 400px;
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(240, 147, 251, 0.4);
+        }
+
+        .btn-primary svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* IP List - lebih rapi */
+        .ip-list {
+            max-height: 350px;
             overflow-y: auto;
-            margin-top: var(--spacing-md);
+            margin: 0;
         }
 
         .ip-item {
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: var(--spacing-md);
-            padding: var(--spacing-md);
-            background: white;
-            border-radius: var(--radius-md);
-            margin-bottom: var(--spacing-sm);
-            border: 2px solid #e2e8f0;
-            transition: all 0.3s ease;
+            padding: 15px;
+            border-bottom: 2px solid #f0f0f0;
+            transition: all 0.3s;
+        }
+
+        .ip-item:last-child {
+            border-bottom: none;
         }
 
         .ip-item:hover {
-            border-color: #667eea;
-            transform: translateX(4px);
+            background: linear-gradient(90deg, #fef5ff 0%, #fff5f8 100%);
+            padding-left: 20px;
         }
 
         .ip-info {
@@ -539,93 +577,105 @@
         }
 
         .ip-address {
+            font-size: 1.1em;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 4px;
             display: flex;
             align-items: center;
-            gap: var(--spacing-sm);
-            font-size: 16px;
-            font-weight: 700;
-            color: #2d3748;
-            margin-bottom: 4px;
+            gap: 8px;
         }
 
         .ip-address svg {
             width: 18px;
             height: 18px;
-            color: #667eea;
+            color: #f093fb;
             flex-shrink: 0;
         }
 
         .ip-meta {
-            font-size: 13px;
-            color: #718096;
+            font-size: 0.85em;
+            color: #888;
             font-weight: 500;
+            line-height: 1.4;
+        }
+
+        .btn-danger {
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #ff6b9d 0%, #ff3d71 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 0.85em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
             display: flex;
-            flex-wrap: wrap;
-            gap: var(--spacing-md);
+            align-items: center;
+            gap: 6px;
+            white-space: nowrap;
+            flex-shrink: 0;
         }
 
-        .ip-notes {
-            color: #667eea;
-            font-weight: 600;
+        .btn-danger:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(255, 107, 157, 0.4);
         }
 
-        /* Logs List */
-        .logs-container {
+        .btn-danger svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* Logs - lebih rapi */
+        .logs-list {
             max-height: 350px;
             overflow-y: auto;
-            margin-top: var(--spacing-md);
+            margin: 0;
         }
 
         .log-item {
-            padding: var(--spacing-md);
-            background: white;
-            border-radius: var(--radius-md);
-            margin-bottom: var(--spacing-sm);
-            border-left: 4px solid #667eea;
-            transition: all 0.3s ease;
+            padding: 15px;
+            border-left: 4px solid #f093fb;
+            background: #fef5ff;
+            margin-bottom: 10px;
+            border-radius: 12px;
+            transition: all 0.3s;
+        }
+
+        .log-item:last-child {
+            margin-bottom: 0;
         }
 
         .log-item:hover {
-            transform: translateX(4px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transform: translateX(3px);
+            box-shadow: -3px 5px 15px rgba(0, 0, 0, 0.08);
         }
 
         .log-item.blocked {
             border-left-color: #ff6b9d;
+            background: #fff5f8;
         }
 
         .log-item.success {
             border-left-color: #43e97b;
-        }
-
-        .log-header {
-            display: flex;
-            align-items: center;
-            gap: var(--spacing-sm);
-            margin-bottom: var(--spacing-xs);
-            flex-wrap: wrap;
+            background: #f0fff4;
         }
 
         .log-action {
             font-weight: 700;
-            color: #2d3748;
-        }
-
-        .log-ip {
-            color: #718096;
-            font-weight: 500;
+            color: #333;
         }
 
         .log-status {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
+            gap: 5px;
             padding: 4px 10px;
-            border-radius: var(--radius-sm);
-            font-size: 12px;
+            border-radius: 8px;
+            font-size: 0.8em;
             font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            margin-left: 8px;
         }
 
         .log-status.allowed {
@@ -638,36 +688,43 @@
             color: #c2185b;
         }
 
-        .log-time {
-            font-size: 13px;
-            color: #a0aec0;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            margin-top: var(--spacing-xs);
+        .log-status svg {
+            width: 14px;
+            height: 14px;
         }
 
-        /* Alerts */
+        .log-time {
+            font-size: 0.8em;
+            color: #999;
+            margin-top: 6px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .log-time svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        /* Alert */
         .alert {
-            padding: var(--spacing-md) var(--spacing-lg);
-            border-radius: var(--radius-md);
-            margin-bottom: var(--spacing-lg);
+            padding: 16px 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
             display: none;
             font-weight: 600;
             animation: slideDown 0.3s ease;
-            border: 2px solid transparent;
         }
 
         .alert.success {
             background: linear-gradient(135deg, #d0f5e0 0%, #c8ffd4 100%);
             color: #00695c;
-            border-color: #43e97b;
         }
 
         .alert.error {
             background: linear-gradient(135deg, #ffd4e5 0%, #ffc0d4 100%);
             color: #c2185b;
-            border-color: #ff6b9d;
         }
 
         .alert.show {
@@ -685,24 +742,24 @@
             }
         }
 
-        /* Empty States */
+        /* Empty State */
         .empty-state {
             text-align: center;
-            padding: var(--spacing-2xl) var(--spacing-lg);
-            color: #cbd5e0;
+            padding: 40px 20px;
+            color: #ccc;
         }
 
         .empty-state svg {
-            width: 64px;
-            height: 64px;
-            margin-bottom: var(--spacing-md);
+            width: 60px;
+            height: 60px;
+            margin-bottom: 15px;
             opacity: 0.5;
         }
 
         .empty-state p {
-            font-size: 16px;
             font-weight: 600;
-            color: #a0aec0;
+            font-size: 1em;
+            margin: 0;
         }
 
         /* Modal */
@@ -711,14 +768,13 @@
             position: fixed;
             top: 0;
             left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.75);
-            backdrop-filter: blur(8px);
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
             z-index: 1000;
             justify-content: center;
             align-items: center;
-            padding: var(--spacing-lg);
         }
 
         .modal-overlay.show {
@@ -727,10 +783,10 @@
 
         .modal {
             background: white;
-            border-radius: var(--radius-lg);
-            padding: var(--spacing-2xl);
-            max-width: 480px;
-            width: 100%;
+            border-radius: 25px;
+            padding: 50px;
+            max-width: 500px;
+            width: 90%;
             text-align: center;
             box-shadow: 0 25px 70px rgba(0, 0, 0, 0.3);
             animation: popIn 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
@@ -738,7 +794,7 @@
 
         @keyframes popIn {
             0% {
-                transform: scale(0.8);
+                transform: scale(0.5);
                 opacity: 0;
             }
             100% {
@@ -750,146 +806,129 @@
         .modal-icon {
             width: 80px;
             height: 80px;
-            background: var(--danger-gradient);
+            background: linear-gradient(135deg, #ff6b9d 0%, #ff3d71 100%);
             border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto var(--spacing-lg);
-            box-shadow: 0 10px 25px rgba(255, 107, 157, 0.4);
+            margin: 0 auto 25px;
         }
 
         .modal-icon svg {
-            width: 36px;
-            height: 36px;
+            width: 45px;
+            height: 45px;
             color: white;
         }
 
-        .modal-title {
-            font-size: 24px;
+        .modal h2 {
+            font-size: 2em;
             font-weight: 800;
-            color: #2d3748;
-            margin-bottom: var(--spacing-sm);
+            color: #333;
+            margin-bottom: 15px;
         }
 
-        .modal-message {
-            font-size: 16px;
-            color: #718096;
-            margin-bottom: var(--spacing-xl);
+        .modal p {
+            font-size: 1.1em;
+            color: #666;
+            margin-bottom: 30px;
             line-height: 1.6;
         }
 
+        .modal button {
+            background: linear-gradient(135deg, #ff6b9d 0%, #ff3d71 100%);
+            color: white;
+            padding: 16px 40px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .modal button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(255, 107, 157, 0.4);
+        }
+
         /* Scrollbar */
-        .ip-list-container::-webkit-scrollbar,
-        .logs-container::-webkit-scrollbar {
-            width: 6px;
+        ::-webkit-scrollbar {
+            width: 8px;
         }
 
-        .ip-list-container::-webkit-scrollbar-track,
-        .logs-container::-webkit-scrollbar-track {
-            background: #f1f3f9;
+        ::-webkit-scrollbar-track {
+            background: #f1f3f5;
             border-radius: 10px;
         }
 
-        .ip-list-container::-webkit-scrollbar-thumb,
-        .logs-container::-webkit-scrollbar-thumb {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
             border-radius: 10px;
         }
 
-        .ip-list-container::-webkit-scrollbar-thumb:hover,
-        .logs-container::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
-        }
-
-        /* Loading States */
-        .loading {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .loading::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-            animation: loading 1.5s infinite;
-        }
-
-        @keyframes loading {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
-        }
-
-        /* Responsive */
+        /* Responsive adjustments */
         @media (max-width: 768px) {
-            .main-content {
-                padding: var(--spacing-lg);
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 10px;
             }
             
-            .dashboard-grid {
-                gap: var(--spacing-md);
+            .stat-box {
+                padding: 15px;
             }
             
-            .card {
-                padding: var(--spacing-lg);
-            }
-            
-            .header-content {
-                flex-direction: column;
-                text-align: center;
-                gap: var(--spacing-md);
-            }
-            
-            .header-left {
-                flex-direction: column;
-                text-align: center;
+            .stat-box h3 {
+                font-size: 1.8em;
             }
             
             .login-card {
-                padding: var(--spacing-xl) var(--spacing-lg);
+                padding: 40px 30px;
+            }
+            
+            .card {
+                padding: 20px;
             }
         }
 
         @media (max-width: 480px) {
-            .main-content {
-                padding: var(--spacing-md);
+            body {
+                padding: 15px;
             }
             
-            .card {
-                padding: var(--spacing-md);
+            .container {
+                padding: 0;
             }
             
-            .input-group {
-                gap: var(--spacing-sm);
+            .dashboard-header {
+                padding: 20px;
+            }
+            
+            .header-left h1 {
+                font-size: 1.4em;
+            }
+            
+            .card-header h2 {
+                font-size: 1.2em;
             }
         }
     </style>
 </head>
 <body>
-    <div class="app-container">
+    <div class="container">
         <!-- Login Page -->
         <div id="loginPage">
             <div class="login-card">
-                <div class="login-header">
-                    <div class="login-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-                    </div>
-                    <h1 class="login-title">Admin Login</h1>
-                    <p class="login-subtitle">Enter your admin key to access dashboard</p>
+                <div class="login-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
                 </div>
+                <h1>Admin Login</h1>
+                <p>Enter your admin key to access dashboard</p>
                 
                 <div id="loginAlert" class="alert"></div>
                 
-                <div class="form-group">
-                    <input type="password" id="adminKey" placeholder="Enter Admin Key" class="input-field">
-                </div>
-                
-                <button class="btn btn-primary" onclick="authenticate()">
-                    <span>Login to Dashboard</span>
+                <input type="password" id="adminKey" placeholder="Enter Admin Key" class="login-input">
+                <button class="btn-login" onclick="authenticate()">
+                    <span>Login</span>
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                 </button>
             </div>
@@ -897,118 +936,100 @@
 
         <!-- Dashboard Page -->
         <div id="dashboardPage" style="display: none;">
-            <!-- Header -->
+            <!-- Header - Kiri: IP Whitelist Dashboard, Kanan: Logout Button -->
             <div class="dashboard-header">
-                <div class="header-content">
-                    <div class="header-left">
-                        <div class="logo">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
-                        </div>
-                        <div class="header-title">
-                            <h1>IP Whitelist Dashboard</h1>
-                            <p>Manage your IP whitelist with ease</p>
-                        </div>
-                    </div>
-                    <button class="btn btn-danger" onclick="logout()">
-                        <span>Logout</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/></svg>
-                    </button>
+                <div class="header-left">
+                    <h1>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+                        IP Whitelist Dashboard
+                    </h1>
                 </div>
+                <button class="btn-logout" onclick="logout()">
+                    <span>Logout</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/></svg>
+                </button>
             </div>
 
-            <!-- Main Content -->
-            <div class="main-content">
-                <div id="alert" class="alert"></div>
+            <div id="alert" class="alert"></div>
 
-                <!-- Statistics Section -->
-                <div class="dashboard-grid">
+            <!-- Dashboard Layout -->
+            <div class="dashboard-layout">
+                <!-- Baris pertama: Statistics dan Settings -->
+                <div class="main-cards">
+                    <!-- Statistics Card -->
                     <div class="card">
                         <div class="card-header">
-                            <div class="card-icon primary">
+                            <div class="card-icon purple">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
                             </div>
-                            <div>
-                                <h2 class="card-title">System Statistics</h2>
-                                <p class="card-subtitle">Overview of IP activity</p>
-                            </div>
+                            <h2>Statistics</h2>
                         </div>
                         <div class="stats-grid">
-                            <div class="stat-card">
-                                <div class="stat-value" id="totalIps">0</div>
-                                <div class="stat-label">Total IPs</div>
+                            <div class="stat-box">
+                                <h3 id="totalIps">0</h3>
+                                <p>Total IPs</p>
                             </div>
-                            <div class="stat-card">
-                                <div class="stat-value" id="allowedChecks">0</div>
-                                <div class="stat-label">Allowed</div>
+                            <div class="stat-box">
+                                <h3 id="allowedChecks">0</h3>
+                                <p>Allowed</p>
                             </div>
-                            <div class="stat-card">
-                                <div class="stat-value" id="blockedChecks">0</div>
-                                <div class="stat-label">Blocked</div>
+                            <div class="stat-box">
+                                <h3 id="blockedChecks">0</h3>
+                                <p>Blocked</p>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Settings Card -->
-                    <div class="card settings-card">
+                    <!-- Global Settings Card -->
+                    <div class="card">
                         <div class="card-header">
-                            <div class="card-icon info">
+                            <div class="card-icon blue">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
                             </div>
-                            <div>
-                                <h2 class="card-title">Global Settings</h2>
-                                <p class="card-subtitle">Configure system-wide rules</p>
-                            </div>
+                            <h2>Global Settings</h2>
                         </div>
-                        <div class="toggle-wrapper">
+                        <div class="toggle-container">
                             <div class="toggle-switch">
                                 <input type="checkbox" id="allowAllToggle" onchange="toggleAllowAll()">
                                 <span class="slider"></span>
                             </div>
                             <div class="toggle-label">
                                 <strong>Allow All IPs</strong>
-                                <span>When enabled, all IP addresses will be allowed regardless of whitelist</span>
+                                <span>When enabled, all IPs will be allowed</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Add IP Section -->
-                <div class="dashboard-grid full-width">
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="card-icon success">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
-                            </div>
-                            <div>
-                                <h2 class="card-title">Add IP Address</h2>
-                                <p class="card-subtitle">Add new IP to whitelist</p>
-                            </div>
+                <!-- Add IP Card (full width) -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon green">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
                         </div>
-                        <div class="input-group">
-                            <input type="text" id="newIp" placeholder="192.168.1.1" class="form-control">
-                            <input type="text" id="ipNotes" placeholder="Notes (optional)" class="form-control">
-                            <button class="btn btn-primary" onclick="addIp()">
-                                <span>Add IP</span>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                            </button>
-                        </div>
+                        <h2>Add IP Address</h2>
+                    </div>
+                    <div class="input-group">
+                        <input type="text" id="newIp" placeholder="192.168.1.1">
+                        <input type="text" id="ipNotes" placeholder="Notes (optional)">
+                        <button class="btn-primary" onclick="addIp()">
+                            <span>Add IP</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                        </button>
                     </div>
                 </div>
 
-                <!-- IP List & Activity Logs -->
-                <div class="dashboard-grid">
-                    <!-- IP List -->
+                <!-- Baris terakhir: IP List dan Activity Logs -->
+                <div class="content-cards">
+                    <!-- IP List Card -->
                     <div class="card">
                         <div class="card-header">
-                            <div class="card-icon secondary">
+                            <div class="card-icon purple">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
                             </div>
-                            <div>
-                                <h2 class="card-title">Whitelisted IPs</h2>
-                                <p class="card-subtitle">Manage allowed IP addresses</p>
-                            </div>
+                            <h2>Whitelisted IPs</h2>
                         </div>
-                        <div class="ip-list-container" id="ipList">
+                        <div class="ip-list" id="ipList">
                             <div class="empty-state">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
                                 <p>No IPs in whitelist yet</p>
@@ -1016,18 +1037,15 @@
                         </div>
                     </div>
 
-                    <!-- Activity Logs -->
+                    <!-- Activity Logs Card -->
                     <div class="card">
                         <div class="card-header">
-                            <div class="card-icon primary">
+                            <div class="card-icon blue">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>
                             </div>
-                            <div>
-                                <h2 class="card-title">Recent Activity</h2>
-                                <p class="card-subtitle">Latest access attempts</p>
-                            </div>
+                            <h2>Recent Activity</h2>
                         </div>
-                        <div class="logs-container" id="logsList">
+                        <div class="logs-list" id="logsList">
                             <div class="empty-state">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>
                                 <p>No activity logs yet</p>
@@ -1045,15 +1063,14 @@
             <div class="modal-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M16 16s-1.5-2-4-2-4 2-4 2"/><line x1="9" x2="9.01" y1="9" y2="9"/><line x1="15" x2="15.01" y1="9" y2="9"/></svg>
             </div>
-            <h2 class="modal-title" id="modalTitle">Oops!</h2>
-            <p class="modal-message" id="modalMessage">Wrong admin key. Try again!</p>
-            <button class="btn btn-primary" onclick="closeSassyModal()">Try Again</button>
+            <h2 id="modalTitle">Oops!</h2>
+            <p id="modalMessage">Wrong admin key. Try again!</p>
+            <button onclick="closeSassyModal()">Try Again</button>
         </div>
     </div>
 
     <!-- JavaScript tetap sama persis seperti yang Anda miliki -->
     <script>
-        // JavaScript code remains exactly the same as provided
         let currentAdminKey = '';
         let failedAttempts = 0;
 
@@ -1184,11 +1201,11 @@
                                     ${ip.ip_address}
                                 </div>
                                 <div class="ip-meta">
-                                    <span>Added: ${new Date(ip.added_at).toLocaleString()}</span>
-                                    ${ip.notes ? `<span class="ip-notes">Notes: ${ip.notes}</span>` : ''}
+                                    Added: ${new Date(ip.added_at).toLocaleString()}
+                                    ${ip.notes ? `<br>Notes: ${ip.notes}` : ''}
                                 </div>
                             </div>
-                            <button class="btn btn-danger" onclick="removeIp('${ip.ip_address}')">
+                            <button class="btn-danger" onclick="removeIp('${ip.ip_address}')">
                                 <span>Remove</span>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
                             </button>
@@ -1208,9 +1225,9 @@
                 if (data.logs && data.logs.length > 0) {
                     logsDiv.innerHTML = data.logs.slice(0, 20).map(log => `
                         <div class="log-item ${log.status === 'BLOCKED' ? 'blocked' : 'success'}">
-                            <div class="log-header">
+                            <div>
                                 <span class="log-action">${log.action}</span>
-                                <span class="log-ip">- ${log.ip_address}</span>
+                                <span style="color: #999;"> - ${log.ip_address}</span>
                                 <span class="log-status ${log.status === 'ALLOWED' || log.status === 'ALLOWED_ALL' ? 'allowed' : 'blocked'}">
                                     ${log.status === 'ALLOWED' || log.status === 'ALLOWED_ALL' ? 
                                         '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>' : 
