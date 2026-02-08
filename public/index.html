@@ -20,6 +20,7 @@
             background: #e8ecf1;
             min-height: 100vh;
             padding: 15px;
+            padding-bottom: 85px;
             position: relative;
             overflow-x: hidden;
         }
@@ -57,12 +58,13 @@
         }
 
         .container {
-            max-width: 1400px;
+            max-width: 800px;
             margin: 0 auto;
             position: relative;
             z-index: 1;
         }
 
+        /* Login Page */
         #loginPage {
             display: flex;
             justify-content: center;
@@ -176,6 +178,7 @@
             height: 18px;
         }
 
+        /* Dashboard */
         #dashboardPage {
             animation: fadeIn 0.5s ease-out;
         }
@@ -185,6 +188,7 @@
             to { opacity: 1; }
         }
 
+        /* Header */
         .dashboard-header {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
@@ -198,14 +202,8 @@
             align-items: center;
         }
 
-        .header-left {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
         .header-left h1 {
-            font-size: 1.5em;
+            font-size: 1.3em;
             font-weight: 800;
             color: #333;
             display: flex;
@@ -215,13 +213,9 @@
         }
 
         .header-left h1 svg {
-            width: 28px;
-            height: 28px;
+            width: 24px;
+            height: 24px;
             color: #f093fb;
-        }
-
-        .logout-container {
-            position: relative;
         }
 
         .logout-icon {
@@ -231,8 +225,6 @@
             color: white;
             border: none;
             border-radius: 6px;
-            font-size: 1em;
-            font-weight: 700;
             cursor: pointer;
             transition: all 0.3s;
             display: flex;
@@ -246,72 +238,63 @@
             box-shadow: 0 8px 20px rgba(255, 107, 157, 0.4);
         }
 
-        .logout-tooltip {
-            position: absolute;
-            top: 100%;
-            right: 0;
-            margin-top: 8px;
-            padding: 6px 12px;
-            background: #333;
-            color: white;
-            font-size: 0.75em;
+        /* Alert */
+        .alert {
+            padding: 12px 16px;
+            margin-bottom: 15px;
+            border-radius: 6px;
+            display: none;
             font-weight: 600;
-            border-radius: 5px;
-            white-space: nowrap;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s;
-            z-index: 100;
+            font-size: 0.9em;
+            animation: slideDown 0.3s ease;
+            border: 2px solid transparent;
         }
 
-        .logout-container:hover .logout-tooltip {
-            opacity: 1;
-            visibility: visible;
+        .alert.success {
+            background: linear-gradient(135deg, #d0f5e0 0%, #c8ffd4 100%);
+            color: #00695c;
+            border-color: #43e97b;
         }
 
-        .dashboard-layout {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 15px;
+        .alert.error {
+            background: linear-gradient(135deg, #ffd4e5 0%, #ffc0d4 100%);
+            color: #c2185b;
+            border-color: #ff6b9d;
         }
 
-        .main-cards {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 15px;
+        .alert.show {
+            display: block;
         }
 
-        .content-cards {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-        }
-
-        @media (max-width: 1200px) {
-            .main-cards {
-                grid-template-columns: 1fr;
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
 
-        @media (max-width: 768px) {
-            .content-cards {
-                grid-template-columns: 1fr;
-            }
+        /* View Sections */
+        .view-section {
+            display: none;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .view-section.active {
+            display: block;
         }
 
         .card {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
-            padding: 18px;
+            padding: 20px;
             border-radius: 8px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
             border: 1px solid rgba(255, 255, 255, 0.8);
-            transition: transform 0.3s;
-        }
-
-        .card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
         }
 
         .card-header {
@@ -349,12 +332,13 @@
         }
 
         .card-header h2 {
-            font-size: 1.15em;
+            font-size: 1.2em;
             font-weight: 700;
             color: #333;
             margin: 0;
         }
 
+        /* Stats */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -363,17 +347,11 @@
 
         .stat-box {
             background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            padding: 15px 10px;
+            padding: 20px 10px;
             border-radius: 8px;
             text-align: center;
             color: white;
-            transition: transform 0.3s;
             box-shadow: 0 4px 15px rgba(240, 147, 251, 0.3);
-        }
-
-        .stat-box:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(240, 147, 251, 0.4);
         }
 
         .stat-box:nth-child(2) {
@@ -381,70 +359,240 @@
             box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);
         }
 
-        .stat-box:nth-child(2):hover {
-            box-shadow: 0 8px 25px rgba(79, 172, 254, 0.4);
-        }
-
         .stat-box:nth-child(3) {
             background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
             box-shadow: 0 4px 15px rgba(67, 233, 123, 0.3);
         }
 
-        .stat-box:nth-child(3):hover {
-            box-shadow: 0 8px 25px rgba(67, 233, 123, 0.4);
-        }
-
         .stat-box h3 {
-            font-size: 1.8em;
+            font-size: 2em;
             font-weight: 800;
-            margin-bottom: 4px;
+            margin-bottom: 5px;
             line-height: 1;
         }
 
         .stat-box p {
-            font-size: 0.75em;
+            font-size: 0.8em;
             font-weight: 600;
             opacity: 0.95;
             margin: 0;
         }
 
-        @media (max-width: 768px) {
-            .stat-box h3 {
-                font-size: 1.5em;
-            }
-            
-            .stat-box p {
-                font-size: 0.7em;
-            }
-
-            .stat-box {
-                padding: 12px 8px;
-            }
+        /* Input Group */
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
         }
 
-        @media (max-width: 480px) {
-            .stat-box h3 {
-                font-size: 1.3em;
-            }
-            
-            .stat-box p {
-                font-size: 0.65em;
-            }
-
-            .stat-box {
-                padding: 10px 6px;
-            }
+        input[type="text"] {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 0.95em;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            transition: all 0.3s;
+            background: white;
         }
 
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #f093fb;
+            box-shadow: 0 0 0 4px rgba(240, 147, 251, 0.1);
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.95em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(240, 147, 251, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(240, 147, 251, 0.4);
+        }
+
+        .btn-primary svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* IP List */
+        .ip-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .ip-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            border-bottom: 1px solid #f0f0f0;
+            transition: all 0.3s;
+            background: white;
+            border-radius: 6px;
+            margin-bottom: 8px;
+        }
+
+        .ip-item:hover {
+            background: linear-gradient(90deg, #fef5ff 0%, #fff5f8 100%);
+            padding-left: 16px;
+        }
+
+        .ip-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .ip-address {
+            font-size: 1em;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 3px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .ip-address svg {
+            width: 16px;
+            height: 16px;
+            color: #f093fb;
+            flex-shrink: 0;
+        }
+
+        .ip-meta {
+            font-size: 0.8em;
+            color: #888;
+            font-weight: 500;
+            line-height: 1.4;
+        }
+
+        .btn-danger {
+            padding: 8px 16px;
+            background: linear-gradient(135deg, #ff6b9d 0%, #ff3d71 100%);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.8em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            white-space: nowrap;
+            flex-shrink: 0;
+            box-shadow: 0 4px 15px rgba(255, 107, 157, 0.3);
+        }
+
+        .btn-danger:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(255, 107, 157, 0.4);
+        }
+
+        .btn-danger svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        /* Logs */
+        .logs-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .log-item {
+            padding: 12px;
+            border-left: 3px solid #f093fb;
+            background: #fef5ff;
+            margin-bottom: 8px;
+            border-radius: 6px;
+        }
+
+        .log-item.blocked {
+            border-left-color: #ff6b9d;
+            background: #fff5f8;
+        }
+
+        .log-item.success {
+            border-left-color: #43e97b;
+            background: #f0fff4;
+        }
+
+        .log-action {
+            font-weight: 700;
+            color: #333;
+            font-size: 0.9em;
+        }
+
+        .log-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 3px 8px;
+            border-radius: 5px;
+            font-size: 0.75em;
+            font-weight: 700;
+            margin-left: 6px;
+            background: white;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .log-status.allowed {
+            background: #d0f5e0;
+            color: #00a854;
+            border-color: rgba(0, 168, 84, 0.2);
+        }
+
+        .log-status.blocked {
+            background: #ffd4e5;
+            color: #c2185b;
+            border-color: rgba(194, 24, 91, 0.2);
+        }
+
+        .log-status svg {
+            width: 12px;
+            height: 12px;
+        }
+
+        .log-time {
+            font-size: 0.75em;
+            color: #999;
+            margin-top: 5px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .log-time svg {
+            width: 12px;
+            height: 12px;
+        }
+
+        /* Toggle */
         .toggle-container {
             display: flex;
             align-items: center;
             gap: 12px;
             padding: 15px;
             background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            margin: 0;
             border-radius: 6px;
-            border: 1px solid rgba(0, 0, 0, 0.05);
         }
 
         .toggle-switch {
@@ -511,14 +659,12 @@
         }
 
         .toggle-status {
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
+            display: block;
+            margin-top: 5px;
             padding: 4px 10px;
             border-radius: 5px;
             font-size: 0.75em;
             font-weight: 700;
-            margin-top: 5px;
         }
 
         .toggle-status.enabled {
@@ -531,281 +677,11 @@
             color: #c2185b;
         }
 
-        .input-group {
-            display: flex;
-            gap: 10px;
-            align-items: stretch;
-            flex-wrap: wrap;
-        }
-
-        input[type="text"] {
-            flex: 1;
-            min-width: 150px;
-            padding: 12px 14px;
-            border: 2px solid #e0e0e0;
-            border-radius: 6px;
-            font-size: 0.9em;
-            font-family: 'Inter', sans-serif;
-            font-weight: 500;
-            transition: all 0.3s;
-            background: white;
-        }
-
-        input[type="text"]:focus {
-            outline: none;
-            border-color: #f093fb;
-            box-shadow: 0 0 0 4px rgba(240, 147, 251, 0.1);
-        }
-
-        .btn-primary {
-            padding: 12px 24px;
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            color: white;
-            border: none;
-            border-radius: 6px;
-            font-size: 0.9em;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            white-space: nowrap;
-            box-shadow: 0 4px 15px rgba(240, 147, 251, 0.3);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(240, 147, 251, 0.4);
-        }
-
-        .btn-primary svg {
-            width: 16px;
-            height: 16px;
-        }
-
-        .ip-list {
-            max-height: 320px;
-            overflow-y: auto;
-            margin: 0;
-            border: 1px solid rgba(0, 0, 0, 0.05);
-            border-radius: 6px;
-        }
-
-        .ip-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px;
-            border-bottom: 1px solid #f0f0f0;
-            transition: all 0.3s;
-            background: white;
-        }
-
-        .ip-item:first-child {
-            border-top-left-radius: 6px;
-            border-top-right-radius: 6px;
-        }
-
-        .ip-item:last-child {
-            border-bottom: none;
-            border-bottom-left-radius: 6px;
-            border-bottom-right-radius: 6px;
-        }
-
-        .ip-item:hover {
-            background: linear-gradient(90deg, #fef5ff 0%, #fff5f8 100%);
-            padding-left: 16px;
-        }
-
-        .ip-info {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .ip-address {
-            font-size: 1em;
-            font-weight: 700;
-            color: #333;
-            margin-bottom: 3px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .ip-address svg {
-            width: 16px;
-            height: 16px;
-            color: #f093fb;
-            flex-shrink: 0;
-        }
-
-        .ip-meta {
-            font-size: 0.8em;
-            color: #888;
-            font-weight: 500;
-            line-height: 1.4;
-        }
-
-        .btn-danger {
-            padding: 8px 16px;
-            background: linear-gradient(135deg, #ff6b9d 0%, #ff3d71 100%);
-            color: white;
-            border: none;
-            border-radius: 6px;
-            font-size: 0.8em;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            white-space: nowrap;
-            flex-shrink: 0;
-            box-shadow: 0 4px 15px rgba(255, 107, 157, 0.3);
-        }
-
-        .btn-danger:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(255, 107, 157, 0.4);
-        }
-
-        .btn-danger svg {
-            width: 14px;
-            height: 14px;
-        }
-
-        .logs-list {
-            max-height: 320px;
-            overflow-y: auto;
-            margin: 0;
-            border: 1px solid rgba(0, 0, 0, 0.05);
-            border-radius: 6px;
-        }
-
-        .log-item {
-            padding: 12px;
-            border-left: 3px solid #f093fb;
-            background: #fef5ff;
-            margin-bottom: 8px;
-            border-radius: 6px;
-            transition: all 0.3s;
-        }
-
-        .log-item:last-child {
-            margin-bottom: 0;
-        }
-
-        .log-item:hover {
-            transform: translateX(3px);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-        }
-
-        .log-item.blocked {
-            border-left-color: #ff6b9d;
-            background: #fff5f8;
-        }
-
-        .log-item.success {
-            border-left-color: #43e97b;
-            background: #f0fff4;
-        }
-
-        .log-action {
-            font-weight: 700;
-            color: #333;
-            font-size: 0.9em;
-        }
-
-        .log-status {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            padding: 3px 8px;
-            border-radius: 5px;
-            font-size: 0.75em;
-            font-weight: 700;
-            margin-left: 6px;
-            background: white;
-            border: 1px solid rgba(0, 0, 0, 0.1);
-        }
-
-        .log-status.allowed {
-            background: #d0f5e0;
-            color: #00a854;
-            border-color: rgba(0, 168, 84, 0.2);
-        }
-
-        .log-status.blocked {
-            background: #ffd4e5;
-            color: #c2185b;
-            border-color: rgba(194, 24, 91, 0.2);
-        }
-
-        .log-status svg {
-            width: 12px;
-            height: 12px;
-        }
-
-        .log-time {
-            font-size: 0.75em;
-            color: #999;
-            margin-top: 5px;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .log-time svg {
-            width: 12px;
-            height: 12px;
-        }
-
-        .alert {
-            padding: 12px 16px;
-            margin-bottom: 15px;
-            border-radius: 6px;
-            display: none;
-            font-weight: 600;
-            font-size: 0.9em;
-            animation: slideDown 0.3s ease;
-            border: 2px solid transparent;
-        }
-
-        .alert.success {
-            background: linear-gradient(135deg, #d0f5e0 0%, #c8ffd4 100%);
-            color: #00695c;
-            border-color: #43e97b;
-        }
-
-        .alert.error {
-            background: linear-gradient(135deg, #ffd4e5 0%, #ffc0d4 100%);
-            color: #c2185b;
-            border-color: #ff6b9d;
-        }
-
-        .alert.show {
-            display: block;
-        }
-
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
+        /* Empty State */
         .empty-state {
             text-align: center;
-            padding: 30px 15px;
+            padding: 40px 20px;
             color: #ccc;
-            background: white;
-            border-radius: 6px;
         }
 
         .empty-state svg {
@@ -821,6 +697,86 @@
             margin: 0;
         }
 
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08);
+            padding: 10px 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .nav-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            padding: 8px 0;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            background: none;
+            color: #888;
+        }
+
+        .nav-item:hover {
+            color: #f093fb;
+        }
+
+        .nav-item.active {
+            color: #f093fb;
+        }
+
+        .nav-item svg {
+            width: 22px;
+            height: 22px;
+        }
+
+        .nav-item span {
+            font-size: 0.7em;
+            font-weight: 600;
+        }
+
+        /* Copyright */
+        .copyright {
+            text-align: center;
+            padding: 15px;
+            margin-top: 15px;
+            font-size: 0.8em;
+            color: #888;
+            font-weight: 500;
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(10px);
+            border-radius: 8px;
+        }
+
+        .copyright .heart {
+            color: #f093fb;
+            display: inline-block;
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            10%, 30% { transform: scale(1.1); }
+            20%, 40% { transform: scale(1); }
+        }
+
+        /* Modal */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -847,7 +803,6 @@
             width: 90%;
             text-align: center;
             box-shadow: 0 25px 70px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.8);
             animation: popIn 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
         }
 
@@ -913,31 +868,7 @@
             box-shadow: 0 10px 25px rgba(255, 107, 157, 0.4);
         }
 
-        .copyright {
-            text-align: center;
-            padding: 20px 15px;
-            margin-top: 20px;
-            font-size: 0.85em;
-            color: #888;
-            font-weight: 500;
-            background: rgba(255, 255, 255, 0.5);
-            backdrop-filter: blur(10px);
-            border-radius: 8px;
-            border: 1px solid rgba(255, 255, 255, 0.6);
-        }
-
-        .copyright .heart {
-            color: #f093fb;
-            display: inline-block;
-            animation: heartbeat 1.5s ease-in-out infinite;
-        }
-
-        @keyframes heartbeat {
-            0%, 100% { transform: scale(1); }
-            10%, 30% { transform: scale(1.1); }
-            20%, 40% { transform: scale(1); }
-        }
-
+        /* Scrollbar */
         .ip-list::-webkit-scrollbar,
         .logs-list::-webkit-scrollbar {
             width: 5px;
@@ -954,57 +885,36 @@
             border-radius: 3px;
         }
 
-        .ip-list::-webkit-scrollbar-thumb:hover,
-        .logs-list::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(135deg, #f5576c 0%, #f093fb 100%);
-        }
-
         @media (max-width: 768px) {
-            body {
-                padding: 12px;
+            .stat-box h3 {
+                font-size: 1.6em;
             }
 
-            .login-card {
-                padding: 30px 25px;
-            }
-            
-            .card {
-                padding: 15px;
-            }
-            
-            .dashboard-header {
-                padding: 12px 15px;
-            }
-            
-            .header-left h1 {
-                font-size: 1.3em;
+            .stat-box p {
+                font-size: 0.7em;
             }
 
-            .input-group {
-                flex-direction: column;
-            }
-            
-            .input-group input {
-                width: 100%;
-            }
-            
-            .btn-primary {
-                width: 100%;
+            .stat-box {
+                padding: 15px 8px;
             }
         }
 
         @media (max-width: 480px) {
             .header-left h1 {
-                font-size: 1.2em;
+                font-size: 1.1em;
             }
 
             .header-left h1 svg {
-                width: 24px;
-                height: 24px;
+                width: 20px;
+                height: 20px;
             }
-            
-            .card-header h2 {
-                font-size: 1.05em;
+
+            .stat-box h3 {
+                font-size: 1.4em;
+            }
+
+            .stat-box p {
+                font-size: 0.65em;
             }
         }
     </style>
@@ -1041,69 +951,44 @@
                 <div class="header-left">
                     <h1>
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
-                        IP Whitelist Dashboard
+                        IP Dashboard
                     </h1>
                 </div>
-                <div class="logout-container">
-                    <button class="logout-icon" onclick="logout()" title="Logout">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/></svg>
-                    </button>
-                    <div class="logout-tooltip">Logout</div>
-                </div>
+                <button class="logout-icon" onclick="logout()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/></svg>
+                </button>
             </div>
 
             <div id="alert" class="alert"></div>
 
-            <!-- Dashboard Layout -->
-            <div class="dashboard-layout">
-                <!-- Main Cards Row -->
-                <div class="main-cards">
-                    <!-- Statistics Card -->
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="card-icon purple">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
-                            </div>
-                            <h2>Statistics</h2>
+            <!-- View: Statistics -->
+            <div id="viewStats" class="view-section active">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon purple">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
                         </div>
-                        <div class="stats-grid">
-                            <div class="stat-box">
-                                <h3 id="totalIps">0</h3>
-                                <p>Total IPs</p>
-                            </div>
-                            <div class="stat-box">
-                                <h3 id="allowedChecks">0</h3>
-                                <p>Allowed</p>
-                            </div>
-                            <div class="stat-box">
-                                <h3 id="blockedChecks">0</h3>
-                                <p>Blocked</p>
-                            </div>
-                        </div>
+                        <h2>Statistics</h2>
                     </div>
-
-                    <!-- Global Settings Card -->
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="card-icon blue">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
-                            </div>
-                            <h2>Global Settings</h2>
+                    <div class="stats-grid">
+                        <div class="stat-box">
+                            <h3 id="totalIps">0</h3>
+                            <p>Total IPs</p>
                         </div>
-                        <div class="toggle-container">
-                            <div class="toggle-switch">
-                                <input type="checkbox" id="allowAllToggle" onchange="toggleAllowAll()">
-                                <span class="slider"></span>
-                            </div>
-                            <div class="toggle-label">
-                                <strong>Allow All IPs</strong>
-                                <span id="toggleStatus" class="toggle-status disabled">Status: Disabled</span>
-                            </div>
+                        <div class="stat-box">
+                            <h3 id="allowedChecks">0</h3>
+                            <p>Allowed</p>
+                        </div>
+                        <div class="stat-box">
+                            <h3 id="blockedChecks">0</h3>
+                            <p>Blocked</p>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <!-- Add IP Card -->
+            <!-- View: Add IP -->
+            <div id="viewAddIP" class="view-section">
                 <div class="card">
                     <div class="card-header">
                         <div class="card-icon green">
@@ -1120,47 +1005,96 @@
                         </button>
                     </div>
                 </div>
+            </div>
 
-                <!-- Content Cards Row -->
-                <div class="content-cards">
-                    <!-- IP List Card -->
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="card-icon purple">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
-                            </div>
-                            <h2>Whitelisted IPs</h2>
+            <!-- View: IP List -->
+            <div id="viewIPList" class="view-section">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon purple">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
                         </div>
-                        <div class="ip-list" id="ipList">
-                            <div class="empty-state">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
-                                <p>No IPs in whitelist yet</p>
-                            </div>
-                        </div>
+                        <h2>Whitelisted IPs</h2>
                     </div>
-
-                    <!-- Activity Logs Card -->
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="card-icon blue">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>
-                            </div>
-                            <h2>Recent Activity</h2>
-                        </div>
-                        <div class="logs-list" id="logsList">
-                            <div class="empty-state">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>
-                                <p>No activity logs yet</p>
-                            </div>
+                    <div class="ip-list" id="ipList">
+                        <div class="empty-state">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+                            <p>No IPs in whitelist yet</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Copyright Footer -->
+            <!-- View: Activity -->
+            <div id="viewActivity" class="view-section">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon blue">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>
+                        </div>
+                        <h2>Recent Activity</h2>
+                    </div>
+                    <div class="logs-list" id="logsList">
+                        <div class="empty-state">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>
+                            <p>No activity logs yet</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- View: Settings -->
+            <div id="viewSettings" class="view-section">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon blue">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+                        </div>
+                        <h2>Global Settings</h2>
+                    </div>
+                    <div class="toggle-container">
+                        <div class="toggle-switch">
+                            <input type="checkbox" id="allowAllToggle" onchange="toggleAllowAll()">
+                            <span class="slider"></span>
+                        </div>
+                        <div class="toggle-label">
+                            <strong>Allow All IPs</strong>
+                            <span id="toggleStatus" class="toggle-status disabled">Status: ❌ Disabled</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Copyright -->
             <div class="copyright">
                 Made with <span class="heart">❤️</span> by You
             </div>
+        </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <div class="bottom-nav" id="bottomNav" style="display: none;">
+        <div class="nav-container">
+            <button class="nav-item active" onclick="switchView('viewStats')">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+                <span>Stats</span>
+            </button>
+            <button class="nav-item" onclick="switchView('viewAddIP')">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                <span>Add IP</span>
+            </button>
+            <button class="nav-item" onclick="switchView('viewIPList')">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+                <span>IP List</span>
+            </button>
+            <button class="nav-item" onclick="switchView('viewActivity')">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>
+                <span>Activity</span>
+            </button>
+            <button class="nav-item" onclick="switchView('viewSettings')">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v6m0 6v6"/><path d="m15.66 5.66-4.24 4.24m0 4.24-4.24 4.24"/></svg>
+                <span>Settings</span>
+            </button>
         </div>
     </div>
 
@@ -1179,6 +1113,7 @@
     <script>
         let currentAdminKey = '';
         let failedAttempts = 0;
+        let currentView = 'viewStats';
 
         const sassyMessages = [
             { title: "Wrong Password!", message: "That's not the right admin key. Try again!" },
@@ -1188,6 +1123,21 @@
             { title: "Come On!", message: "This is getting embarrassing now... 😬" }
         ];
 
+        // Navigation
+        function switchView(viewId) {
+            document.querySelectorAll('.view-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+
+            document.getElementById(viewId).classList.add('active');
+            event.currentTarget.classList.add('active');
+            currentView = viewId;
+        }
+
+        // Session
         window.addEventListener('DOMContentLoaded', () => {
             const savedAdminKey = localStorage.getItem('adminKey');
             if (savedAdminKey) {
@@ -1209,6 +1159,7 @@
                 if (data.success) {
                     document.getElementById('loginPage').style.display = 'none';
                     document.getElementById('dashboardPage').style.display = 'block';
+                    document.getElementById('bottomNav').style.display = 'block';
                     loadData(data);
                 } else {
                     localStorage.removeItem('adminKey');
@@ -1274,6 +1225,7 @@
             failedAttempts = 0;
             
             document.getElementById('dashboardPage').style.display = 'none';
+            document.getElementById('bottomNav').style.display = 'none';
             document.getElementById('loginPage').style.display = 'flex';
             document.getElementById('adminKey').value = '';
             showLoginAlert('Logged out successfully!', 'success');
@@ -1303,6 +1255,7 @@
                     
                     document.getElementById('loginPage').style.display = 'none';
                     document.getElementById('dashboardPage').style.display = 'block';
+                    document.getElementById('bottomNav').style.display = 'block';
                     document.getElementById('adminKey').value = '';
                     
                     showAlert('Welcome back! 🎉', 'success');
@@ -1342,7 +1295,6 @@
                 document.getElementById('allowedChecks').textContent = allowedCount;
                 document.getElementById('blockedChecks').textContent = blockedCount;
 
-                // Update toggle UI
                 updateToggleStatus(data.allow_all || false);
 
                 const ipListDiv = document.getElementById('ipList');
@@ -1480,51 +1432,31 @@
             const checkbox = document.getElementById('allowAllToggle');
             const allowAll = checkbox.checked;
 
-            console.log('[Toggle] Starting toggle with value:', allowAll);
-
             try {
-                const requestBody = { 
-                    allowAll: allowAll,
-                    adminKey: currentAdminKey 
-                };
-
-                console.log('[Toggle] Sending request:', requestBody);
-
                 const response = await fetch('/ips/toggle-all', {
                     method: 'POST',
                     headers: { 
                         'Content-Type': 'application/json',
                         'Accept': 'application/json'
                     },
-                    body: JSON.stringify(requestBody)
+                    body: JSON.stringify({ 
+                        allowAll: allowAll,
+                        adminKey: currentAdminKey 
+                    })
                 });
 
-                console.log('[Toggle] Response status:', response.status);
-
                 const data = await response.json();
-                console.log('[Toggle] Response data:', data);
 
                 if (data.success) {
-                    showAlert(
-                        `Allow all ${allowAll ? 'enabled' : 'disabled'}! ✨`, 
-                        'success'
-                    );
-                    
-                    // Update UI immediately
+                    showAlert(`Allow all ${allowAll ? 'enabled' : 'disabled'}! ✨`, 'success');
                     updateToggleStatus(allowAll);
-                    
-                    // Force reload to sync state
                     setTimeout(() => loadData(), 500);
                 } else {
-                    console.error('[Toggle] Error from server:', data.message);
                     showAlert(data.message || 'Error toggling allow all', 'error');
-                    // Revert checkbox and status
                     updateToggleStatus(!allowAll);
                 }
             } catch (error) {
-                console.error('[Toggle] Exception:', error);
                 showAlert('Error: ' + error.message, 'error');
-                // Revert checkbox and status
                 updateToggleStatus(!allowAll);
             }
         }
