@@ -362,7 +362,7 @@
             margin: 0;
         }
 
-        /* Stats Grid - ALWAYS 3 COLUMNS EVEN ON MOBILE */
+        /* Stats Grid */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -416,7 +416,6 @@
             margin: 0;
         }
 
-        /* Mobile stats - smaller but still 3 columns */
         @media (max-width: 768px) {
             .stat-box h3 {
                 font-size: 1.5em;
@@ -1321,7 +1320,7 @@
 
                 document.getElementById('totalIps').textContent = data.total || 0;
                 
-                const allowedCount = (data.logs || []).filter(log => log.status === 'ALLOWED').length;
+                const allowedCount = (data.logs || []).filter(log => log.status === 'ALLOWED' || log.status === 'ALLOWED_ALL').length;
                 const blockedCount = (data.logs || []).filter(log => log.status === 'BLOCKED').length;
                 
                 document.getElementById('allowedChecks').textContent = allowedCount;
@@ -1461,33 +1460,52 @@
         }
 
         async function toggleAllowAll() {
-            const allowAll = document.getElementById('allowAllToggle').checked;
+            const checkbox = document.getElementById('allowAllToggle');
+            const allowAll = checkbox.checked;
+
+            console.log('[Toggle] Starting toggle with value:', allowAll);
 
             try {
+                const requestBody = { 
+                    allowAll: allowAll,
+                    adminKey: currentAdminKey 
+                };
+
+                console.log('[Toggle] Sending request:', requestBody);
+
                 const response = await fetch('/ips/toggle-all', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ 
-                        allowAll, 
-                        adminKey: currentAdminKey 
-                    })
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify(requestBody)
                 });
 
+                console.log('[Toggle] Response status:', response.status);
+
                 const data = await response.json();
+                console.log('[Toggle] Response data:', data);
 
                 if (data.success) {
                     showAlert(
                         `Allow all ${allowAll ? 'enabled' : 'disabled'}! ✨`, 
                         'success'
                     );
-                    loadData();
+                    
+                    // Force reload to sync state
+                    setTimeout(() => loadData(), 500);
                 } else {
+                    console.error('[Toggle] Error from server:', data.message);
                     showAlert(data.message || 'Error toggling allow all', 'error');
-                    document.getElementById('allowAllToggle').checked = !allowAll;
+                    // Revert checkbox
+                    checkbox.checked = !allowAll;
                 }
             } catch (error) {
+                console.error('[Toggle] Exception:', error);
                 showAlert('Error: ' + error.message, 'error');
-                document.getElementById('allowAllToggle').checked = !allowAll;
+                // Revert checkbox
+                checkbox.checked = !allowAll;
             }
         }
 
@@ -1508,4 +1526,4 @@
         }, 30000);
     </script>
 </body>
-</html>
+    </html>
