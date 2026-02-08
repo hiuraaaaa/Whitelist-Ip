@@ -19,8 +19,6 @@
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             background: #e8ecf1;
             min-height: 100vh;
-            padding: 15px;
-            padding-bottom: 85px;
             position: relative;
             overflow-x: hidden;
         }
@@ -57,11 +55,22 @@
             right: 200px;
         }
 
+        .main-wrapper {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            padding-bottom: 110px;
+        }
+
         .container {
-            max-width: 800px;
+            max-width: 600px;
             margin: 0 auto;
+            padding: 15px;
+            flex: 1;
             position: relative;
             z-index: 1;
+            display: flex;
+            flex-direction: column;
         }
 
         /* Login Page */
@@ -181,6 +190,9 @@
         /* Dashboard */
         #dashboardPage {
             animation: fadeIn 0.5s ease-out;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
         }
 
         @keyframes fadeIn {
@@ -277,14 +289,23 @@
             }
         }
 
+        /* Content Wrapper */
+        .content-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
         /* View Sections */
         .view-section {
             display: none;
             animation: fadeIn 0.3s ease-out;
+            flex: 1;
         }
 
         .view-section.active {
-            display: block;
+            display: flex;
+            flex-direction: column;
         }
 
         .card {
@@ -294,7 +315,9 @@
             border-radius: 8px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
             border: 1px solid rgba(255, 255, 255, 0.8);
-            margin-bottom: 15px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
         }
 
         .card-header {
@@ -433,7 +456,7 @@
 
         /* IP List */
         .ip-list {
-            max-height: 400px;
+            flex: 1;
             overflow-y: auto;
         }
 
@@ -513,7 +536,7 @@
 
         /* Logs */
         .logs-list {
-            max-height: 400px;
+            flex: 1;
             overflow-y: auto;
         }
 
@@ -680,7 +703,7 @@
         /* Empty State */
         .empty-state {
             text-align: center;
-            padding: 40px 20px;
+            padding: 60px 20px;
             color: #ccc;
         }
 
@@ -697,6 +720,35 @@
             margin: 0;
         }
 
+        /* Copyright - FIXED */
+        .copyright {
+            position: fixed;
+            bottom: 60px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            padding: 12px 15px;
+            font-size: 0.8em;
+            color: #888;
+            font-weight: 500;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            z-index: 99;
+        }
+
+        .copyright .heart {
+            color: #f093fb;
+            display: inline-block;
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            10%, 30% { transform: scale(1.1); }
+            20%, 40% { transform: scale(1); }
+        }
+
         /* Bottom Navigation */
         .bottom-nav {
             position: fixed;
@@ -707,12 +759,12 @@
             backdrop-filter: blur(20px);
             border-top: 1px solid rgba(0, 0, 0, 0.05);
             box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08);
-            padding: 10px 0;
+            padding: 8px 0;
             z-index: 100;
         }
 
         .nav-container {
-            max-width: 800px;
+            max-width: 600px;
             margin: 0 auto;
             display: flex;
             justify-content: space-around;
@@ -725,7 +777,7 @@
             flex-direction: column;
             align-items: center;
             gap: 4px;
-            padding: 8px 0;
+            padding: 6px 0;
             cursor: pointer;
             transition: all 0.3s;
             border: none;
@@ -749,31 +801,6 @@
         .nav-item span {
             font-size: 0.7em;
             font-weight: 600;
-        }
-
-        /* Copyright */
-        .copyright {
-            text-align: center;
-            padding: 15px;
-            margin-top: 15px;
-            font-size: 0.8em;
-            color: #888;
-            font-weight: 500;
-            background: rgba(255, 255, 255, 0.5);
-            backdrop-filter: blur(10px);
-            border-radius: 8px;
-        }
-
-        .copyright .heart {
-            color: #f093fb;
-            display: inline-block;
-            animation: heartbeat 1.5s ease-in-out infinite;
-        }
-
-        @keyframes heartbeat {
-            0%, 100% { transform: scale(1); }
-            10%, 30% { transform: scale(1.1); }
-            20%, 40% { transform: scale(1); }
         }
 
         /* Modal */
@@ -924,7 +951,7 @@
     <div class="blob blob-2"></div>
     <div class="blob blob-3"></div>
 
-    <div class="container">
+    <div class="main-wrapper">
         <!-- Login Page -->
         <div id="loginPage">
             <div class="login-card">
@@ -946,130 +973,134 @@
 
         <!-- Dashboard Page -->
         <div id="dashboardPage" style="display: none;">
-            <!-- Header -->
-            <div class="dashboard-header">
-                <div class="header-left">
-                    <h1>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
-                        IP Dashboard
-                    </h1>
+            <div class="container">
+                <!-- Header -->
+                <div class="dashboard-header">
+                    <div class="header-left">
+                        <h1>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+                            IP Dashboard
+                        </h1>
+                    </div>
+                    <button class="logout-icon" onclick="logout()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/></svg>
+                    </button>
                 </div>
-                <button class="logout-icon" onclick="logout()">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/></svg>
-                </button>
-            </div>
 
-            <div id="alert" class="alert"></div>
+                <div id="alert" class="alert"></div>
 
-            <!-- View: Statistics -->
-            <div id="viewStats" class="view-section active">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="card-icon purple">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+                <div class="content-wrapper">
+                    <!-- View: Statistics -->
+                    <div id="viewStats" class="view-section active">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-icon purple">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+                                </div>
+                                <h2>Statistics</h2>
+                            </div>
+                            <div class="stats-grid">
+                                <div class="stat-box">
+                                    <h3 id="totalIps">0</h3>
+                                    <p>Total IPs</p>
+                                </div>
+                                <div class="stat-box">
+                                    <h3 id="allowedChecks">0</h3>
+                                    <p>Allowed</p>
+                                </div>
+                                <div class="stat-box">
+                                    <h3 id="blockedChecks">0</h3>
+                                    <p>Blocked</p>
+                                </div>
+                            </div>
                         </div>
-                        <h2>Statistics</h2>
                     </div>
-                    <div class="stats-grid">
-                        <div class="stat-box">
-                            <h3 id="totalIps">0</h3>
-                            <p>Total IPs</p>
+
+                    <!-- View: Add IP -->
+                    <div id="viewAddIP" class="view-section">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-icon green">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                                </div>
+                                <h2>Add IP Address</h2>
+                            </div>
+                            <div class="input-group">
+                                <input type="text" id="newIp" placeholder="192.168.1.1">
+                                <input type="text" id="ipNotes" placeholder="Notes (optional)">
+                                <button class="btn-primary" onclick="addIp()">
+                                    <span>Add IP</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                                </button>
+                            </div>
                         </div>
-                        <div class="stat-box">
-                            <h3 id="allowedChecks">0</h3>
-                            <p>Allowed</p>
+                    </div>
+
+                    <!-- View: IP List -->
+                    <div id="viewIPList" class="view-section">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-icon purple">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+                                </div>
+                                <h2>Whitelisted IPs</h2>
+                            </div>
+                            <div class="ip-list" id="ipList">
+                                <div class="empty-state">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+                                    <p>No IPs in whitelist yet</p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="stat-box">
-                            <h3 id="blockedChecks">0</h3>
-                            <p>Blocked</p>
+                    </div>
+
+                    <!-- View: Activity -->
+                    <div id="viewActivity" class="view-section">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-icon blue">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>
+                                </div>
+                                <h2>Recent Activity</h2>
+                            </div>
+                            <div class="logs-list" id="logsList">
+                                <div class="empty-state">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>
+                                    <p>No activity logs yet</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- View: Settings -->
+                    <div id="viewSettings" class="view-section">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-icon blue">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+                                </div>
+                                <h2>Global Settings</h2>
+                            </div>
+                            <div class="toggle-container">
+                                <div class="toggle-switch">
+                                    <input type="checkbox" id="allowAllToggle" onchange="toggleAllowAll()">
+                                    <span class="slider"></span>
+                                </div>
+                                <div class="toggle-label">
+                                    <strong>Allow All IPs</strong>
+                                    <span id="toggleStatus" class="toggle-status disabled">Status: ❌ Disabled</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- View: Add IP -->
-            <div id="viewAddIP" class="view-section">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="card-icon green">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
-                        </div>
-                        <h2>Add IP Address</h2>
-                    </div>
-                    <div class="input-group">
-                        <input type="text" id="newIp" placeholder="192.168.1.1">
-                        <input type="text" id="ipNotes" placeholder="Notes (optional)">
-                        <button class="btn-primary" onclick="addIp()">
-                            <span>Add IP</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- View: IP List -->
-            <div id="viewIPList" class="view-section">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="card-icon purple">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
-                        </div>
-                        <h2>Whitelisted IPs</h2>
-                    </div>
-                    <div class="ip-list" id="ipList">
-                        <div class="empty-state">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
-                            <p>No IPs in whitelist yet</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- View: Activity -->
-            <div id="viewActivity" class="view-section">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="card-icon blue">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>
-                        </div>
-                        <h2>Recent Activity</h2>
-                    </div>
-                    <div class="logs-list" id="logsList">
-                        <div class="empty-state">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>
-                            <p>No activity logs yet</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- View: Settings -->
-            <div id="viewSettings" class="view-section">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="card-icon blue">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
-                        </div>
-                        <h2>Global Settings</h2>
-                    </div>
-                    <div class="toggle-container">
-                        <div class="toggle-switch">
-                            <input type="checkbox" id="allowAllToggle" onchange="toggleAllowAll()">
-                            <span class="slider"></span>
-                        </div>
-                        <div class="toggle-label">
-                            <strong>Allow All IPs</strong>
-                            <span id="toggleStatus" class="toggle-status disabled">Status: ❌ Disabled</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Copyright -->
-            <div class="copyright">
-                Made with <span class="heart">❤️</span> by You
             </div>
         </div>
+    </div>
+
+    <!-- Copyright - FIXED -->
+    <div class="copyright" id="copyright" style="display: none;">
+        Made with <span class="heart">❤️</span> by You
     </div>
 
     <!-- Bottom Navigation -->
@@ -1123,7 +1154,6 @@
             { title: "Come On!", message: "This is getting embarrassing now... 😬" }
         ];
 
-        // Navigation
         function switchView(viewId) {
             document.querySelectorAll('.view-section').forEach(section => {
                 section.classList.remove('active');
@@ -1137,7 +1167,6 @@
             currentView = viewId;
         }
 
-        // Session
         window.addEventListener('DOMContentLoaded', () => {
             const savedAdminKey = localStorage.getItem('adminKey');
             if (savedAdminKey) {
@@ -1160,6 +1189,7 @@
                     document.getElementById('loginPage').style.display = 'none';
                     document.getElementById('dashboardPage').style.display = 'block';
                     document.getElementById('bottomNav').style.display = 'block';
+                    document.getElementById('copyright').style.display = 'block';
                     loadData(data);
                 } else {
                     localStorage.removeItem('adminKey');
@@ -1226,6 +1256,7 @@
             
             document.getElementById('dashboardPage').style.display = 'none';
             document.getElementById('bottomNav').style.display = 'none';
+            document.getElementById('copyright').style.display = 'none';
             document.getElementById('loginPage').style.display = 'flex';
             document.getElementById('adminKey').value = '';
             showLoginAlert('Logged out successfully!', 'success');
@@ -1256,6 +1287,7 @@
                     document.getElementById('loginPage').style.display = 'none';
                     document.getElementById('dashboardPage').style.display = 'block';
                     document.getElementById('bottomNav').style.display = 'block';
+                    document.getElementById('copyright').style.display = 'block';
                     document.getElementById('adminKey').value = '';
                     
                     showAlert('Welcome back! 🎉', 'success');
