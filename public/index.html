@@ -24,7 +24,6 @@
             overflow-x: hidden;
         }
 
-        /* Gradient Blobs Background */
         .blob {
             position: fixed;
             border-radius: 50%;
@@ -64,7 +63,6 @@
             z-index: 1;
         }
 
-        /* Login Page */
         #loginPage {
             display: flex;
             justify-content: center;
@@ -178,7 +176,6 @@
             height: 18px;
         }
 
-        /* Dashboard Page */
         #dashboardPage {
             animation: fadeIn 0.5s ease-out;
         }
@@ -188,7 +185,6 @@
             to { opacity: 1; }
         }
 
-        /* Dashboard Header */
         .dashboard-header {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
@@ -224,7 +220,6 @@
             color: #f093fb;
         }
 
-        /* Logout Icon */
         .logout-container {
             position: relative;
         }
@@ -274,7 +269,6 @@
             visibility: visible;
         }
 
-        /* Dashboard Layout */
         .dashboard-layout {
             display: grid;
             grid-template-columns: 1fr;
@@ -305,7 +299,6 @@
             }
         }
 
-        /* Cards */
         .card {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
@@ -362,7 +355,6 @@
             margin: 0;
         }
 
-        /* Stats Grid */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -444,7 +436,6 @@
             }
         }
 
-        /* Toggle */
         .toggle-container {
             display: flex;
             align-items: center;
@@ -519,7 +510,27 @@
             font-weight: 500;
         }
 
-        /* Input Group */
+        .toggle-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 4px 10px;
+            border-radius: 5px;
+            font-size: 0.75em;
+            font-weight: 700;
+            margin-top: 5px;
+        }
+
+        .toggle-status.enabled {
+            background: #d0f5e0;
+            color: #00a854;
+        }
+
+        .toggle-status.disabled {
+            background: #ffd4e5;
+            color: #c2185b;
+        }
+
         .input-group {
             display: flex;
             gap: 10px;
@@ -574,7 +585,6 @@
             height: 16px;
         }
 
-        /* IP List */
         .ip-list {
             max-height: 320px;
             overflow-y: auto;
@@ -666,7 +676,6 @@
             height: 14px;
         }
 
-        /* Logs */
         .logs-list {
             max-height: 320px;
             overflow-y: auto;
@@ -753,7 +762,6 @@
             height: 12px;
         }
 
-        /* Alert */
         .alert {
             padding: 12px 16px;
             margin-bottom: 15px;
@@ -792,7 +800,6 @@
             }
         }
 
-        /* Empty State */
         .empty-state {
             text-align: center;
             padding: 30px 15px;
@@ -814,7 +821,6 @@
             margin: 0;
         }
 
-        /* Modal */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -907,7 +913,6 @@
             box-shadow: 0 10px 25px rgba(255, 107, 157, 0.4);
         }
 
-        /* Copyright Footer */
         .copyright {
             text-align: center;
             padding: 20px 15px;
@@ -933,7 +938,6 @@
             20%, 40% { transform: scale(1); }
         }
 
-        /* Scrollbar */
         .ip-list::-webkit-scrollbar,
         .logs-list::-webkit-scrollbar {
             width: 5px;
@@ -955,7 +959,6 @@
             background: linear-gradient(135deg, #f5576c 0%, #f093fb 100%);
         }
 
-        /* Responsive adjustments */
         @media (max-width: 768px) {
             body {
                 padding: 12px;
@@ -1007,7 +1010,6 @@
     </style>
 </head>
 <body>
-    <!-- Gradient Blobs -->
     <div class="blob blob-1"></div>
     <div class="blob blob-2"></div>
     <div class="blob blob-3"></div>
@@ -1095,7 +1097,7 @@
                             </div>
                             <div class="toggle-label">
                                 <strong>Allow All IPs</strong>
-                                <span>When enabled, all IPs will be allowed</span>
+                                <span id="toggleStatus" class="toggle-status disabled">Status: Disabled</span>
                             </div>
                         </div>
                     </div>
@@ -1186,7 +1188,6 @@
             { title: "Come On!", message: "This is getting embarrassing now... 😬" }
         ];
 
-        // ============= SESSION PERSISTENCE =============
         window.addEventListener('DOMContentLoaded', () => {
             const savedAdminKey = localStorage.getItem('adminKey');
             if (savedAdminKey) {
@@ -1216,6 +1217,21 @@
             } catch (error) {
                 localStorage.removeItem('adminKey');
                 currentAdminKey = '';
+            }
+        }
+
+        function updateToggleStatus(enabled) {
+            const statusElement = document.getElementById('toggleStatus');
+            const checkbox = document.getElementById('allowAllToggle');
+            
+            checkbox.checked = enabled;
+            
+            if (enabled) {
+                statusElement.textContent = 'Status: ✅ Enabled';
+                statusElement.className = 'toggle-status enabled';
+            } else {
+                statusElement.textContent = 'Status: ❌ Disabled';
+                statusElement.className = 'toggle-status disabled';
             }
         }
 
@@ -1326,7 +1342,8 @@
                 document.getElementById('allowedChecks').textContent = allowedCount;
                 document.getElementById('blockedChecks').textContent = blockedCount;
 
-                document.getElementById('allowAllToggle').checked = data.allow_all || false;
+                // Update toggle UI
+                updateToggleStatus(data.allow_all || false);
 
                 const ipListDiv = document.getElementById('ipList');
                 if (data.ip_details && data.ip_details.length > 0) {
@@ -1493,19 +1510,22 @@
                         'success'
                     );
                     
+                    // Update UI immediately
+                    updateToggleStatus(allowAll);
+                    
                     // Force reload to sync state
                     setTimeout(() => loadData(), 500);
                 } else {
                     console.error('[Toggle] Error from server:', data.message);
                     showAlert(data.message || 'Error toggling allow all', 'error');
-                    // Revert checkbox
-                    checkbox.checked = !allowAll;
+                    // Revert checkbox and status
+                    updateToggleStatus(!allowAll);
                 }
             } catch (error) {
                 console.error('[Toggle] Exception:', error);
                 showAlert('Error: ' + error.message, 'error');
-                // Revert checkbox
-                checkbox.checked = !allowAll;
+                // Revert checkbox and status
+                updateToggleStatus(!allowAll);
             }
         }
 
@@ -1526,4 +1546,4 @@
         }, 30000);
     </script>
 </body>
-    </html>
+</html>
