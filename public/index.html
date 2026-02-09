@@ -17,107 +17,81 @@
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: #0f0f1e;
             min-height: 100vh;
+            padding: 15px;
             position: relative;
             overflow-x: hidden;
         }
 
-        /* Animated Gradient Background */
-        .gradient-bg {
+        /* Background Image Layer */
+        .bg-image {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 0;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            animation: gradientShift 15s ease infinite;
+            z-index: -2;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            /* Default background jika ga ada image */
+            background-color: #e8ecf1;
         }
 
-        @keyframes gradientShift {
-            0%, 100% {
-                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            }
-            25% {
-                background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            }
-            50% {
-                background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            }
-            75% {
-                background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
-            }
+        /* Overlay untuk bikin text lebih readable */
+        .bg-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(5px);
         }
 
+        /* Optional: Gradient blobs (disable jika pakai image) */
         .blob {
             position: fixed;
             border-radius: 50%;
-            filter: blur(120px);
-            opacity: 0.4;
-            z-index: 1;
-            animation: float 20s ease-in-out infinite;
+            filter: blur(80px);
+            opacity: 0.3;
+            z-index: -1;
+            display: none; /* Hidden by default, akan muncul kalau ga ada bg image */
         }
 
         .blob-1 {
-            width: 600px;
-            height: 600px;
-            background: rgba(240, 147, 251, 0.5);
+            width: 500px;
+            height: 500px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
             top: -200px;
             left: -150px;
-            animation-delay: 0s;
         }
 
         .blob-2 {
-            width: 700px;
-            height: 700px;
-            background: rgba(79, 172, 254, 0.5);
+            width: 600px;
+            height: 600px;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
             bottom: -250px;
             right: -200px;
-            animation-delay: 5s;
         }
 
         .blob-3 {
-            width: 500px;
-            height: 500px;
-            background: rgba(67, 233, 123, 0.5);
-            top: 50%;
-            left: 50%;
-            animation-delay: 10s;
-        }
-
-        @keyframes float {
-            0%, 100% {
-                transform: translate(0, 0) scale(1);
-            }
-            33% {
-                transform: translate(50px, -50px) scale(1.1);
-            }
-            66% {
-                transform: translate(-50px, 50px) scale(0.9);
-            }
-        }
-
-        .main-wrapper {
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            padding-bottom: 110px;
-            position: relative;
-            z-index: 2;
+            width: 400px;
+            height: 400px;
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            bottom: 100px;
+            right: 200px;
         }
 
         .container {
-            max-width: 600px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 15px;
-            flex: 1;
             position: relative;
-            display: flex;
-            flex-direction: column;
+            z-index: 1;
         }
 
-        /* Login Page */
         #loginPage {
             display: flex;
             justify-content: center;
@@ -127,15 +101,15 @@
         }
 
         .login-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(30px);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
             padding: 40px 35px;
-            border-radius: 20px;
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
             text-align: center;
             max-width: 420px;
             width: 100%;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.8);
             animation: fadeInUp 0.6s ease-out;
         }
 
@@ -151,72 +125,66 @@
         }
 
         .login-icon {
-            width: 80px;
-            height: 80px;
+            width: 60px;
+            height: 60px;
             background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            border-radius: 20px;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 20px;
-            border: 3px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 15px 35px rgba(240, 147, 251, 0.4);
+            border: 2px solid white;
+            box-shadow: 0 10px 25px rgba(240, 147, 251, 0.3);
         }
 
         .login-icon svg {
-            width: 40px;
-            height: 40px;
+            width: 30px;
+            height: 30px;
             color: white;
         }
 
         .login-card h1 {
-            font-size: 2em;
+            font-size: 1.8em;
             font-weight: 800;
-            color: white;
+            color: #333;
             margin-bottom: 8px;
             letter-spacing: -0.5px;
         }
 
         .login-card p {
-            font-size: 0.95em;
-            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9em;
+            color: #888;
             margin-bottom: 25px;
             font-weight: 500;
         }
 
         .login-input {
             width: 100%;
-            padding: 16px 18px;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            border-radius: 12px;
+            padding: 14px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
             font-size: 0.95em;
             font-family: 'Inter', sans-serif;
             font-weight: 500;
             margin-bottom: 15px;
             transition: all 0.3s;
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-        }
-
-        .login-input::placeholder {
-            color: rgba(255, 255, 255, 0.5);
+            background: white;
         }
 
         .login-input:focus {
             outline: none;
             border-color: #f093fb;
-            box-shadow: 0 0 0 4px rgba(240, 147, 251, 0.2);
-            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 0 4px rgba(240, 147, 251, 0.1);
         }
 
         .btn-login {
             width: 100%;
-            padding: 16px;
+            padding: 14px;
             background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
             color: white;
             border: none;
-            border-radius: 12px;
-            font-size: 1em;
+            border-radius: 6px;
+            font-size: 0.95em;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.3s;
@@ -224,25 +192,21 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
-            box-shadow: 0 8px 25px rgba(240, 147, 251, 0.4);
+            box-shadow: 0 4px 15px rgba(240, 147, 251, 0.3);
         }
 
         .btn-login:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(240, 147, 251, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(240, 147, 251, 0.4);
         }
 
         .btn-login svg {
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
         }
 
-        /* Dashboard */
         #dashboardPage {
             animation: fadeIn 0.5s ease-out;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
         }
 
         @keyframes fadeIn {
@@ -250,15 +214,14 @@
             to { opacity: 1; }
         }
 
-        /* Header */
         .dashboard-header {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(30px);
-            padding: 18px 20px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 15px 20px;
             margin-bottom: 15px;
-            border-radius: 16px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.8);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -271,54 +234,23 @@
         }
 
         .header-left h1 {
-            font-size: 1.4em;
+            font-size: 1.5em;
             font-weight: 800;
-            color: white;
+            color: #333;
             display: flex;
             align-items: center;
             gap: 10px;
             margin: 0;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
         }
 
         .header-left h1 svg {
             width: 28px;
             height: 28px;
             color: #f093fb;
-            filter: drop-shadow(0 2px 4px rgba(240, 147, 251, 0.5));
         }
 
-        .header-actions {
-            display: flex;
-            gap: 10px;
-        }
-
-        .btn-refresh {
-            width: 38px;
-            height: 38px;
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .btn-refresh:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: rotate(180deg);
-        }
-
-        .btn-refresh.spinning {
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+        .logout-container {
+            position: relative;
         }
 
         .logout-icon {
@@ -327,176 +259,101 @@
             background: linear-gradient(135deg, #ff6b9d 0%, #ff3d71 100%);
             color: white;
             border: none;
-            border-radius: 10px;
+            border-radius: 6px;
+            font-size: 1em;
+            font-weight: 700;
             cursor: pointer;
             transition: all 0.3s;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 15px rgba(255, 107, 157, 0.4);
+            box-shadow: 0 4px 15px rgba(255, 107, 157, 0.3);
         }
 
         .logout-icon:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(255, 107, 157, 0.5);
+            box-shadow: 0 8px 20px rgba(255, 107, 157, 0.4);
         }
 
-        /* Alert */
-        .alert {
-            padding: 14px 18px;
-            margin-bottom: 15px;
-            border-radius: 12px;
-            display: none;
-            font-weight: 600;
-            font-size: 0.9em;
-            animation: slideDown 0.3s ease;
-            border: 2px solid transparent;
-            backdrop-filter: blur(20px);
-        }
-
-        .alert.success {
-            background: rgba(67, 233, 123, 0.2);
-            color: #43e97b;
-            border-color: rgba(67, 233, 123, 0.5);
-        }
-
-        .alert.error {
-            background: rgba(255, 107, 157, 0.2);
-            color: #ff6b9d;
-            border-color: rgba(255, 107, 157, 0.5);
-        }
-
-        .alert.show {
-            display: block;
-        }
-
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Welcome Card */
-        .welcome-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(30px);
-            padding: 25px;
-            border-radius: 16px;
-            margin-bottom: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-        }
-
-        .welcome-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
-        }
-
-        .welcome-header h2 {
-            font-size: 1.5em;
-            font-weight: 800;
+        .logout-tooltip {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 8px;
+            padding: 6px 12px;
+            background: #333;
             color: white;
-            margin: 0;
-        }
-
-        .current-time {
-            font-size: 0.9em;
-            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.75em;
             font-weight: 600;
-        }
-
-        .welcome-text {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 0.95em;
-            line-height: 1.6;
-        }
-
-        /* Quick Actions */
-        .quick-actions {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-            margin-top: 15px;
-        }
-
-        .quick-btn {
-            background: rgba(255, 255, 255, 0.15);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 12px;
-            border-radius: 12px;
-            color: white;
-            font-weight: 600;
-            font-size: 0.85em;
-            cursor: pointer;
+            border-radius: 5px;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
             transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            z-index: 100;
         }
 
-        .quick-btn:hover {
-            background: rgba(255, 255, 255, 0.25);
-            transform: translateY(-2px);
+        .logout-container:hover .logout-tooltip {
+            opacity: 1;
+            visibility: visible;
         }
 
-        .quick-btn svg {
-            width: 18px;
-            height: 18px;
+        .dashboard-layout {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
         }
 
-        /* Content Wrapper */
-        .content-wrapper {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
+        .main-cards {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 15px;
         }
 
-        /* View Sections */
-        .view-section {
-            display: none;
-            animation: fadeIn 0.3s ease-out;
-            flex: 1;
+        .content-cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
         }
 
-        .view-section.active {
-            display: flex;
-            flex-direction: column;
+        @media (max-width: 1200px) {
+            .main-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .content-cards {
+                grid-template-columns: 1fr;
+            }
         }
 
         .card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(30px);
-            padding: 20px;
-            border-radius: 16px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            margin-bottom: 15px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 18px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
         }
 
         .card-header {
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            gap: 10px;
             margin-bottom: 15px;
         }
 
-        .card-title {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
         .card-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
+            width: 38px;
+            height: 38px;
+            border-radius: 6px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -515,418 +372,114 @@
         }
 
         .card-icon svg {
-            width: 22px;
-            height: 22px;
+            width: 20px;
+            height: 20px;
             color: white;
         }
 
         .card-header h2 {
-            font-size: 1.2em;
+            font-size: 1.15em;
             font-weight: 700;
-            color: white;
+            color: #333;
             margin: 0;
         }
 
-        /* Stats */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
+            gap: 10px;
         }
 
         .stat-box {
             background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            padding: 20px 12px;
-            border-radius: 16px;
+            padding: 15px 10px;
+            border-radius: 8px;
             text-align: center;
             color: white;
-            box-shadow: 0 8px 25px rgba(240, 147, 251, 0.4);
-            transition: all 0.3s;
+            transition: transform 0.3s;
+            box-shadow: 0 4px 15px rgba(240, 147, 251, 0.3);
         }
 
         .stat-box:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 35px rgba(240, 147, 251, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(240, 147, 251, 0.4);
         }
 
         .stat-box:nth-child(2) {
             background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            box-shadow: 0 8px 25px rgba(79, 172, 254, 0.4);
+            box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);
         }
 
         .stat-box:nth-child(2):hover {
-            box-shadow: 0 12px 35px rgba(79, 172, 254, 0.5);
+            box-shadow: 0 8px 25px rgba(79, 172, 254, 0.4);
         }
 
         .stat-box:nth-child(3) {
             background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
-            box-shadow: 0 8px 25px rgba(67, 233, 123, 0.4);
+            box-shadow: 0 4px 15px rgba(67, 233, 123, 0.3);
         }
 
         .stat-box:nth-child(3):hover {
-            box-shadow: 0 12px 35px rgba(67, 233, 123, 0.5);
+            box-shadow: 0 8px 25px rgba(67, 233, 123, 0.4);
         }
 
         .stat-box h3 {
-            font-size: 2.2em;
+            font-size: 1.8em;
             font-weight: 800;
-            margin-bottom: 5px;
+            margin-bottom: 4px;
             line-height: 1;
         }
 
         .stat-box p {
-            font-size: 0.8em;
+            font-size: 0.75em;
             font-weight: 600;
             opacity: 0.95;
             margin: 0;
         }
 
-        /* Recent Highlights */
-        .highlights {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-top: 15px;
+        @media (max-width: 768px) {
+            .stat-box h3 {
+                font-size: 1.5em;
+            }
+            
+            .stat-box p {
+                font-size: 0.7em;
+            }
+
+            .stat-box {
+                padding: 12px 8px;
+            }
         }
 
-        .highlight-item {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 12px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            transition: all 0.3s;
+        @media (max-width: 480px) {
+            .stat-box h3 {
+                font-size: 1.3em;
+            }
+            
+            .stat-box p {
+                font-size: 0.65em;
+            }
+
+            .stat-box {
+                padding: 10px 6px;
+            }
         }
 
-        .highlight-item:hover {
-            background: rgba(255, 255, 255, 0.15);
-            transform: translateX(5px);
-        }
-
-        .highlight-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-
-        .highlight-icon.success {
-            background: rgba(67, 233, 123, 0.3);
-        }
-
-        .highlight-icon.danger {
-            background: rgba(255, 107, 157, 0.3);
-        }
-
-        .highlight-icon svg {
-            width: 20px;
-            height: 20px;
-            color: white;
-        }
-
-        .highlight-info {
-            flex: 1;
-        }
-
-        .highlight-title {
-            font-size: 0.9em;
-            font-weight: 700;
-            color: white;
-            margin-bottom: 2px;
-        }
-
-        .highlight-desc {
-            font-size: 0.75em;
-            color: rgba(255, 255, 255, 0.6);
-        }
-
-        /* Search Box */
-        .search-box {
-            margin-bottom: 15px;
-        }
-
-        .search-input {
-            width: 100%;
-            padding: 14px 18px 14px 45px;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            border-radius: 12px;
-            font-size: 0.9em;
-            font-family: 'Inter', sans-serif;
-            font-weight: 500;
-            transition: all 0.3s;
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            position: relative;
-        }
-
-        .search-input::placeholder {
-            color: rgba(255, 255, 255, 0.5);
-        }
-
-        .search-input:focus {
-            outline: none;
-            border-color: #f093fb;
-            box-shadow: 0 0 0 4px rgba(240, 147, 251, 0.2);
-            background: rgba(255, 255, 255, 0.15);
-        }
-
-        .search-wrapper {
-            position: relative;
-        }
-
-        .search-icon {
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: rgba(255, 255, 255, 0.5);
-            pointer-events: none;
-        }
-
-        /* Input Group */
-        .input-group {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        input[type="text"] {
-            width: 100%;
-            padding: 14px 16px;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            border-radius: 12px;
-            font-size: 0.95em;
-            font-family: 'Inter', sans-serif;
-            font-weight: 500;
-            transition: all 0.3s;
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-        }
-
-        input[type="text"]::placeholder {
-            color: rgba(255, 255, 255, 0.5);
-        }
-
-        input[type="text"]:focus {
-            outline: none;
-            border-color: #f093fb;
-            box-shadow: 0 0 0 4px rgba(240, 147, 251, 0.2);
-            background: rgba(255, 255, 255, 0.15);
-        }
-
-        .btn-primary {
-            width: 100%;
-            padding: 16px;
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-size: 1em;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            box-shadow: 0 8px 25px rgba(240, 147, 251, 0.4);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(240, 147, 251, 0.5);
-        }
-
-        .btn-primary svg {
-            width: 20px;
-            height: 20px;
-        }
-
-        /* IP List */
-        .ip-list {
-            flex: 1;
-            overflow-y: auto;
-        }
-
-        .ip-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 14px;
-            transition: all 0.3s;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            margin-bottom: 10px;
-        }
-
-        .ip-item:hover {
-            background: rgba(255, 255, 255, 0.15);
-            transform: translateX(5px);
-        }
-
-        .ip-info {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .ip-address {
-            font-size: 1em;
-            font-weight: 700;
-            color: white;
-            margin-bottom: 5px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .ip-address svg {
-            width: 18px;
-            height: 18px;
-            color: #f093fb;
-            flex-shrink: 0;
-        }
-
-        .ip-meta {
-            font-size: 0.8em;
-            color: rgba(255, 255, 255, 0.6);
-            font-weight: 500;
-            line-height: 1.5;
-        }
-
-        .btn-danger {
-            padding: 10px 18px;
-            background: linear-gradient(135deg, #ff6b9d 0%, #ff3d71 100%);
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-size: 0.85em;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            white-space: nowrap;
-            flex-shrink: 0;
-            box-shadow: 0 4px 15px rgba(255, 107, 157, 0.4);
-        }
-
-        .btn-danger:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(255, 107, 157, 0.5);
-        }
-
-        .btn-danger svg {
-            width: 16px;
-            height: 16px;
-        }
-
-        /* Logs */
-        .logs-list {
-            flex: 1;
-            overflow-y: auto;
-        }
-
-        .log-item {
-            padding: 14px;
-            border-left: 4px solid #f093fb;
-            background: rgba(240, 147, 251, 0.1);
-            margin-bottom: 10px;
-            border-radius: 12px;
-            transition: all 0.3s;
-        }
-
-        .log-item:hover {
-            background: rgba(240, 147, 251, 0.2);
-            transform: translateX(5px);
-        }
-
-        .log-item.blocked {
-            border-left-color: #ff6b9d;
-            background: rgba(255, 107, 157, 0.1);
-        }
-
-        .log-item.blocked:hover {
-            background: rgba(255, 107, 157, 0.2);
-        }
-
-        .log-item.success {
-            border-left-color: #43e97b;
-            background: rgba(67, 233, 123, 0.1);
-        }
-
-        .log-item.success:hover {
-            background: rgba(67, 233, 123, 0.2);
-        }
-
-        .log-action {
-            font-weight: 700;
-            color: white;
-            font-size: 0.9em;
-        }
-
-        .log-status {
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            padding: 4px 10px;
-            border-radius: 8px;
-            font-size: 0.75em;
-            font-weight: 700;
-            margin-left: 8px;
-            background: rgba(255, 255, 255, 0.15);
-        }
-
-        .log-status.allowed {
-            background: rgba(67, 233, 123, 0.3);
-            color: #43e97b;
-        }
-
-        .log-status.blocked {
-            background: rgba(255, 107, 157, 0.3);
-            color: #ff6b9d;
-        }
-
-        .log-status svg {
-            width: 14px;
-            height: 14px;
-        }
-
-        .log-time {
-            font-size: 0.75em;
-            color: rgba(255, 255, 255, 0.6);
-            margin-top: 6px;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .log-time svg {
-            width: 14px;
-            height: 14px;
-        }
-
-        /* Toggle */
         .toggle-container {
             display: flex;
             align-items: center;
-            gap: 15px;
-            padding: 18px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            gap: 12px;
+            padding: 15px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            margin: 0;
+            border-radius: 6px;
+            border: 1px solid rgba(0, 0, 0, 0.05);
         }
 
         .toggle-switch {
             position: relative;
-            width: 60px;
-            height: 32px;
+            width: 54px;
+            height: 28px;
             flex-shrink: 0;
         }
 
@@ -943,16 +496,16 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-color: rgba(255, 255, 255, 0.2);
+            background-color: #ccc;
             transition: 0.4s;
-            border-radius: 32px;
+            border-radius: 28px;
         }
 
         .slider:before {
             position: absolute;
             content: "";
-            height: 24px;
-            width: 24px;
+            height: 20px;
+            width: 20px;
             left: 4px;
             bottom: 4px;
             background-color: white;
@@ -965,7 +518,7 @@
         }
 
         input:checked + .slider:before {
-            transform: translateX(28px);
+            transform: translateX(26px);
         }
 
         .toggle-label {
@@ -974,154 +527,329 @@
 
         .toggle-label strong {
             display: block;
-            font-size: 1em;
+            font-size: 0.95em;
             font-weight: 700;
-            color: white;
-            margin-bottom: 5px;
+            color: #333;
+            margin-bottom: 3px;
         }
 
         .toggle-label span {
-            font-size: 0.85em;
-            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.8em;
+            color: #888;
             font-weight: 500;
         }
 
         .toggle-status {
-            display: block;
-            margin-top: 8px;
-            padding: 5px 12px;
-            border-radius: 8px;
-            font-size: 0.8em;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 4px 10px;
+            border-radius: 5px;
+            font-size: 0.75em;
             font-weight: 700;
+            margin-top: 5px;
         }
 
         .toggle-status.enabled {
-            background: rgba(67, 233, 123, 0.3);
-            color: #43e97b;
+            background: #d0f5e0;
+            color: #00a854;
         }
 
         .toggle-status.disabled {
-            background: rgba(255, 107, 157, 0.3);
-            color: #ff6b9d;
+            background: #ffd4e5;
+            color: #c2185b;
         }
 
-        /* Empty State */
+        .input-group {
+            display: flex;
+            gap: 10px;
+            align-items: stretch;
+            flex-wrap: wrap;
+        }
+
+        input[type="text"] {
+            flex: 1;
+            min-width: 150px;
+            padding: 12px 14px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 0.9em;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            transition: all 0.3s;
+            background: white;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #f093fb;
+            box-shadow: 0 0 0 4px rgba(240, 147, 251, 0.1);
+        }
+
+        .btn-primary {
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.9em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            white-space: nowrap;
+            box-shadow: 0 4px 15px rgba(240, 147, 251, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(240, 147, 251, 0.4);
+        }
+
+        .btn-primary svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .ip-list {
+            max-height: 320px;
+            overflow-y: auto;
+            margin: 0;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            border-radius: 6px;
+        }
+
+        .ip-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            border-bottom: 1px solid #f0f0f0;
+            transition: all 0.3s;
+            background: white;
+        }
+
+        .ip-item:first-child {
+            border-top-left-radius: 6px;
+            border-top-right-radius: 6px;
+        }
+
+        .ip-item:last-child {
+            border-bottom: none;
+            border-bottom-left-radius: 6px;
+            border-bottom-right-radius: 6px;
+        }
+
+        .ip-item:hover {
+            background: linear-gradient(90deg, #fef5ff 0%, #fff5f8 100%);
+            padding-left: 16px;
+        }
+
+        .ip-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .ip-address {
+            font-size: 1em;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 3px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .ip-address svg {
+            width: 16px;
+            height: 16px;
+            color: #f093fb;
+            flex-shrink: 0;
+        }
+
+        .ip-meta {
+            font-size: 0.8em;
+            color: #888;
+            font-weight: 500;
+            line-height: 1.4;
+        }
+
+        .btn-danger {
+            padding: 8px 16px;
+            background: linear-gradient(135deg, #ff6b9d 0%, #ff3d71 100%);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.8em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            white-space: nowrap;
+            flex-shrink: 0;
+            box-shadow: 0 4px 15px rgba(255, 107, 157, 0.3);
+        }
+
+        .btn-danger:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(255, 107, 157, 0.4);
+        }
+
+        .btn-danger svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        .logs-list {
+            max-height: 320px;
+            overflow-y: auto;
+            margin: 0;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            border-radius: 6px;
+        }
+
+        .log-item {
+            padding: 12px;
+            border-left: 3px solid #f093fb;
+            background: #fef5ff;
+            margin-bottom: 8px;
+            border-radius: 6px;
+            transition: all 0.3s;
+        }
+
+        .log-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .log-item:hover {
+            transform: translateX(3px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .log-item.blocked {
+            border-left-color: #ff6b9d;
+            background: #fff5f8;
+        }
+
+        .log-item.success {
+            border-left-color: #43e97b;
+            background: #f0fff4;
+        }
+
+        .log-action {
+            font-weight: 700;
+            color: #333;
+            font-size: 0.9em;
+        }
+
+        .log-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 3px 8px;
+            border-radius: 5px;
+            font-size: 0.75em;
+            font-weight: 700;
+            margin-left: 6px;
+            background: white;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .log-status.allowed {
+            background: #d0f5e0;
+            color: #00a854;
+            border-color: rgba(0, 168, 84, 0.2);
+        }
+
+        .log-status.blocked {
+            background: #ffd4e5;
+            color: #c2185b;
+            border-color: rgba(194, 24, 91, 0.2);
+        }
+
+        .log-status svg {
+            width: 12px;
+            height: 12px;
+        }
+
+        .log-time {
+            font-size: 0.75em;
+            color: #999;
+            margin-top: 5px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .log-time svg {
+            width: 12px;
+            height: 12px;
+        }
+
+        .alert {
+            padding: 12px 16px;
+            margin-bottom: 15px;
+            border-radius: 6px;
+            display: none;
+            font-weight: 600;
+            font-size: 0.9em;
+            animation: slideDown 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .alert.success {
+            background: linear-gradient(135deg, #d0f5e0 0%, #c8ffd4 100%);
+            color: #00695c;
+            border-color: #43e97b;
+        }
+
+        .alert.error {
+            background: linear-gradient(135deg, #ffd4e5 0%, #ffc0d4 100%);
+            color: #c2185b;
+            border-color: #ff6b9d;
+        }
+
+        .alert.show {
+            display: block;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         .empty-state {
             text-align: center;
-            padding: 60px 20px;
-            color: rgba(255, 255, 255, 0.4);
+            padding: 30px 15px;
+            color: #ccc;
+            background: white;
+            border-radius: 6px;
         }
 
         .empty-state svg {
-            width: 60px;
-            height: 60px;
-            margin-bottom: 15px;
+            width: 50px;
+            height: 50px;
+            margin-bottom: 12px;
             opacity: 0.5;
         }
 
         .empty-state p {
             font-weight: 600;
-            font-size: 0.95em;
+            font-size: 0.9em;
             margin: 0;
         }
 
-        /* Copyright - FIXED */
-        .copyright {
-            position: fixed;
-            bottom: 60px;
-            left: 0;
-            right: 0;
-            text-align: center;
-            padding: 12px 15px;
-            font-size: 0.85em;
-            color: rgba(255, 255, 255, 0.7);
-            font-weight: 600;
-            background: rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(20px);
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            z-index: 99;
-        }
-
-        .copyright .heart {
-            color: #f093fb;
-            display: inline-block;
-            animation: heartbeat 1.5s ease-in-out infinite;
-        }
-
-        @keyframes heartbeat {
-            0%, 100% { transform: scale(1); }
-            10%, 30% { transform: scale(1.2); }
-            20%, 40% { transform: scale(1); }
-        }
-
-        /* Bottom Navigation */
-        .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(30px);
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.3);
-            padding: 8px 0;
-            z-index: 100;
-        }
-
-        .nav-container {
-            max-width: 600px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-        }
-
-        .nav-item {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
-            padding: 8px 0;
-            cursor: pointer;
-            transition: all 0.3s;
-            border: none;
-            background: none;
-            color: rgba(255, 255, 255, 0.5);
-            position: relative;
-        }
-
-        .nav-item:hover {
-            color: #f093fb;
-        }
-
-        .nav-item.active {
-            color: #f093fb;
-        }
-
-        .nav-item.active::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 40px;
-            height: 3px;
-            background: linear-gradient(90deg, #f093fb 0%, #f5576c 100%);
-            border-radius: 0 0 3px 3px;
-        }
-
-        .nav-item svg {
-            width: 24px;
-            height: 24px;
-        }
-
-        .nav-item span {
-            font-size: 0.7em;
-            font-weight: 700;
-        }
-
-        /* Modal */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -1129,8 +857,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
             z-index: 1000;
             justify-content: center;
             align-items: center;
@@ -1141,15 +869,14 @@
         }
 
         .modal {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(30px);
-            padding: 45px;
-            border-radius: 20px;
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
             max-width: 450px;
             width: 90%;
             text-align: center;
-            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.8);
             animation: popIn 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
         }
 
@@ -1165,65 +892,89 @@
         }
 
         .modal-icon {
-            width: 80px;
-            height: 80px;
+            width: 70px;
+            height: 70px;
             background: linear-gradient(135deg, #ff6b9d 0%, #ff3d71 100%);
-            border-radius: 20px;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 25px;
-            border: 3px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 15px 35px rgba(255, 107, 157, 0.5);
+            margin: 0 auto 20px;
+            border: 2px solid white;
+            box-shadow: 0 10px 25px rgba(255, 107, 157, 0.4);
         }
 
         .modal-icon svg {
-            width: 45px;
-            height: 45px;
+            width: 38px;
+            height: 38px;
             color: white;
         }
 
         .modal h2 {
-            font-size: 2em;
+            font-size: 1.8em;
             font-weight: 800;
-            color: white;
-            margin-bottom: 15px;
+            color: #333;
+            margin-bottom: 12px;
         }
 
         .modal p {
-            font-size: 1.05em;
-            color: rgba(255, 255, 255, 0.8);
-            margin-bottom: 30px;
+            font-size: 1em;
+            color: #666;
+            margin-bottom: 25px;
             line-height: 1.6;
         }
 
         .modal button {
             background: linear-gradient(135deg, #ff6b9d 0%, #ff3d71 100%);
             color: white;
-            padding: 16px 40px;
+            padding: 14px 35px;
             border: none;
-            border-radius: 12px;
-            font-size: 1em;
+            border-radius: 6px;
+            font-size: 0.95em;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.3s;
-            box-shadow: 0 8px 25px rgba(255, 107, 157, 0.4);
+            box-shadow: 0 4px 15px rgba(255, 107, 157, 0.3);
         }
 
         .modal button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(255, 107, 157, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(255, 107, 157, 0.4);
         }
 
-        /* Scrollbar */
+        .copyright {
+            text-align: center;
+            padding: 20px 15px;
+            margin-top: 20px;
+            font-size: 0.85em;
+            color: #888;
+            font-weight: 500;
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(10px);
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+        }
+
+        .copyright .heart {
+            color: #f093fb;
+            display: inline-block;
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            10%, 30% { transform: scale(1.1); }
+            20%, 40% { transform: scale(1); }
+        }
+
         .ip-list::-webkit-scrollbar,
         .logs-list::-webkit-scrollbar {
-            width: 6px;
+            width: 5px;
         }
 
         .ip-list::-webkit-scrollbar-track,
         .logs-list::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.1);
+            background: #f1f3f9;
         }
 
         .ip-list::-webkit-scrollbar-thumb,
@@ -1232,21 +983,49 @@
             border-radius: 3px;
         }
 
+        .ip-list::-webkit-scrollbar-thumb:hover,
+        .logs-list::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #f5576c 0%, #f093fb 100%);
+        }
+
+        /* Responsive untuk Mobile */
         @media (max-width: 768px) {
-            .stat-box h3 {
-                font-size: 1.8em;
+            body {
+                padding: 12px;
             }
 
-            .stat-box p {
-                font-size: 0.75em;
+            .login-card {
+                padding: 30px 25px;
+            }
+            
+            .card {
+                padding: 15px;
+            }
+            
+            .dashboard-header {
+                padding: 12px 15px;
+            }
+            
+            .header-left h1 {
+                font-size: 1.3em;
             }
 
-            .stat-box {
-                padding: 16px 10px;
+            .input-group {
+                flex-direction: column;
+            }
+            
+            .input-group input {
+                width: 100%;
+            }
+            
+            .btn-primary {
+                width: 100%;
             }
 
-            .quick-actions {
-                grid-template-columns: 1fr;
+            /* Background adjustment untuk mobile */
+            .bg-image {
+                background-size: cover;
+                background-position: center center;
             }
         }
 
@@ -1255,23 +1034,44 @@
                 font-size: 1.2em;
             }
 
-            .stat-box h3 {
-                font-size: 1.6em;
+            .header-left h1 svg {
+                width: 24px;
+                height: 24px;
             }
+            
+            .card-header h2 {
+                font-size: 1.05em;
+            }
+        }
 
-            .welcome-card h2 {
-                font-size: 1.3em;
+        /* Tablet & Desktop adjustments */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .bg-image {
+                background-size: cover;
+                background-position: center;
+            }
+        }
+
+        @media (min-width: 1025px) {
+            .bg-image {
+                background-size: cover;
+                background-position: center;
+                background-attachment: fixed;
             }
         }
     </style>
 </head>
 <body>
-    <div class="gradient-bg"></div>
-    <div class="blob blob-1"></div>
-    <div class="blob blob-2"></div>
-    <div class="blob blob-3"></div>
+    <!-- Background Image Layer -->
+    <div class="bg-image" id="bgImage"></div>
+    <div class="bg-overlay" id="bgOverlay"></div>
 
-    <div class="main-wrapper">
+    <!-- Optional Gradient Blobs (will show if no background image) -->
+    <div class="blob blob-1" id="blob1"></div>
+    <div class="blob blob-2" id="blob2"></div>
+    <div class="blob blob-3" id="blob3"></div>
+
+    <div class="container">
         <!-- Login Page -->
         <div id="loginPage">
             <div class="login-card">
@@ -1293,230 +1093,131 @@
 
         <!-- Dashboard Page -->
         <div id="dashboardPage" style="display: none;">
-            <div class="container">
-                <!-- Header -->
-                <div class="dashboard-header">
-                    <div class="header-left">
-                        <h1>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
-                            IP Dashboard
-                        </h1>
+            <!-- Header -->
+            <div class="dashboard-header">
+                <div class="header-left">
+                    <h1>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+                        IP Whitelist Dashboard
+                    </h1>
+                </div>
+                <div class="logout-container">
+                    <button class="logout-icon" onclick="logout()" title="Logout">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/></svg>
+                    </button>
+                    <div class="logout-tooltip">Logout</div>
+                </div>
+            </div>
+
+            <div id="alert" class="alert"></div>
+
+            <!-- Dashboard Layout -->
+            <div class="dashboard-layout">
+                <!-- Main Cards Row -->
+                <div class="main-cards">
+                    <!-- Statistics Card -->
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon purple">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+                            </div>
+                            <h2>Statistics</h2>
+                        </div>
+                        <div class="stats-grid">
+                            <div class="stat-box">
+                                <h3 id="totalIps">0</h3>
+                                <p>Total IPs</p>
+                            </div>
+                            <div class="stat-box">
+                                <h3 id="allowedChecks">0</h3>
+                                <p>Allowed</p>
+                            </div>
+                            <div class="stat-box">
+                                <h3 id="blockedChecks">0</h3>
+                                <p>Blocked</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="header-actions">
-                        <button class="btn-refresh" id="refreshBtn" onclick="refreshData()">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/></svg>
-                        </button>
-                        <button class="logout-icon" onclick="logout()">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/></svg>
+
+                    <!-- Global Settings Card -->
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon blue">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+                            </div>
+                            <h2>Global Settings</h2>
+                        </div>
+                        <div class="toggle-container">
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="allowAllToggle" onchange="toggleAllowAll()">
+                                <span class="slider"></span>
+                            </div>
+                            <div class="toggle-label">
+                                <strong>Allow All IPs</strong>
+                                <span id="toggleStatus" class="toggle-status disabled">Status: Disabled</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Add IP Card -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon green">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                        </div>
+                        <h2>Add IP Address</h2>
+                    </div>
+                    <div class="input-group">
+                        <input type="text" id="newIp" placeholder="192.168.1.1">
+                        <input type="text" id="ipNotes" placeholder="Notes (optional)">
+                        <button class="btn-primary" onclick="addIp()">
+                            <span>Add IP</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
                         </button>
                     </div>
                 </div>
 
-                <div id="alert" class="alert"></div>
-
-                <div class="content-wrapper">
-                    <!-- View: Statistics -->
-                    <div id="viewStats" class="view-section active">
-                        <!-- Welcome Card -->
-                        <div class="welcome-card">
-                            <div class="welcome-header">
-                                <h2>👋 Welcome Back!</h2>
-                                <div class="current-time" id="currentTime"></div>
+                <!-- Content Cards Row -->
+                <div class="content-cards">
+                    <!-- IP List Card -->
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon purple">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
                             </div>
-                            <p class="welcome-text">Manage your IP whitelist, monitor activity, and keep your system secure.</p>
-                            
-                            <div class="quick-actions">
-                                <button class="quick-btn" onclick="switchView('viewAddIP')">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
-                                    Add New IP
-                                </button>
-                                <button class="quick-btn" onclick="switchView('viewIPList')">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
-                                    View All IPs
-                                </button>
-                            </div>
+                            <h2>Whitelisted IPs</h2>
                         </div>
-
-                        <!-- Stats Card -->
-                        <div class="card">
-                            <div class="card-header">
-                                <div class="card-title">
-                                    <div class="card-icon purple">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
-                                    </div>
-                                    <h2>Statistics</h2>
-                                </div>
-                            </div>
-                            <div class="stats-grid">
-                                <div class="stat-box">
-                                    <h3 id="totalIps">0</h3>
-                                    <p>Total IPs</p>
-                                </div>
-                                <div class="stat-box">
-                                    <h3 id="allowedChecks">0</h3>
-                                    <p>Allowed</p>
-                                </div>
-                                <div class="stat-box">
-                                    <h3 id="blockedChecks">0</h3>
-                                    <p>Blocked</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Recent Highlights -->
-                        <div class="card">
-                            <div class="card-header">
-                                <div class="card-title">
-                                    <div class="card-icon blue">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>
-                                    </div>
-                                    <h2>Recent Activity</h2>
-                                </div>
-                            </div>
-                            <div class="highlights" id="highlights">
-                                <div class="empty-state">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>
-                                    <p>No recent activity</p>
-                                </div>
+                        <div class="ip-list" id="ipList">
+                            <div class="empty-state">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+                                <p>No IPs in whitelist yet</p>
                             </div>
                         </div>
                     </div>
 
-                    <!-- View: Add IP -->
-                    <div id="viewAddIP" class="view-section">
-                        <div class="card">
-                            <div class="card-header">
-                                <div class="card-title">
-                                    <div class="card-icon green">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
-                                    </div>
-                                    <h2>Add IP Address</h2>
-                                </div>
+                    <!-- Activity Logs Card -->
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon blue">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>
                             </div>
-                            <div class="input-group">
-                                <input type="text" id="newIp" placeholder="192.168.1.1">
-                                <input type="text" id="ipNotes" placeholder="Notes (optional)">
-                                <button class="btn-primary" onclick="addIp()">
-                                    <span>Add IP</span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                                </button>
-                            </div>
+                            <h2>Recent Activity</h2>
                         </div>
-                    </div>
-
-                    <!-- View: IP List -->
-                    <div id="viewIPList" class="view-section">
-                        <div class="card" style="flex: 1; display: flex; flex-direction: column;">
-                            <div class="card-header">
-                                <div class="card-title">
-                                    <div class="card-icon purple">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
-                                    </div>
-                                    <h2>Whitelisted IPs</h2>
-                                </div>
-                            </div>
-                            
-                            <div class="search-box">
-                                <div class="search-wrapper">
-                                    <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-                                    <input type="text" class="search-input" id="ipSearch" placeholder="Search IP addresses..." oninput="filterIPs()">
-                                </div>
-                            </div>
-                            
-                            <div class="ip-list" id="ipList">
-                                <div class="empty-state">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
-                                    <p>No IPs in whitelist yet</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- View: Activity -->
-                    <div id="viewActivity" class="view-section">
-                        <div class="card" style="flex: 1; display: flex; flex-direction: column;">
-                            <div class="card-header">
-                                <div class="card-title">
-                                    <div class="card-icon blue">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>
-                                    </div>
-                                    <h2>Activity Logs</h2>
-                                </div>
-                            </div>
-                            
-                            <div class="search-box">
-                                <div class="search-wrapper">
-                                    <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-                                    <input type="text" class="search-input" id="logSearch" placeholder="Search logs..." oninput="filterLogs()">
-                                </div>
-                            </div>
-                            
-                            <div class="logs-list" id="logsList">
-                                <div class="empty-state">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>
-                                    <p>No activity logs yet</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- View: Settings -->
-                    <div id="viewSettings" class="view-section">
-                        <div class="card">
-                            <div class="card-header">
-                                <div class="card-title">
-                                    <div class="card-icon blue">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
-                                    </div>
-                                    <h2>Global Settings</h2>
-                                </div>
-                            </div>
-                            <div class="toggle-container">
-                                <div class="toggle-switch">
-                                    <input type="checkbox" id="allowAllToggle" onchange="toggleAllowAll()">
-                                    <span class="slider"></span>
-                                </div>
-                                <div class="toggle-label">
-                                    <strong>Allow All IPs</strong>
-                                    <span>When enabled, all IP addresses will be granted access</span>
-                                    <span id="toggleStatus" class="toggle-status disabled">Status: ❌ Disabled</span>
-                                </div>
+                        <div class="logs-list" id="logsList">
+                            <div class="empty-state">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>
+                                <p>No activity logs yet</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <!-- Copyright - FIXED -->
-    <div class="copyright" id="copyright" style="display: none;">
-        Made with <span class="heart">❤️</span> by You
-    </div>
-
-    <!-- Bottom Navigation -->
-    <div class="bottom-nav" id="bottomNav" style="display: none;">
-        <div class="nav-container">
-            <button class="nav-item active" onclick="switchView('viewStats')">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
-                <span>Stats</span>
-            </button>
-            <button class="nav-item" onclick="switchView('viewAddIP')">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
-                <span>Add IP</span>
-            </button>
-            <button class="nav-item" onclick="switchView('viewIPList')">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
-                <span>IP List</span>
-            </button>
-            <button class="nav-item" onclick="switchView('viewActivity')">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>
-                <span>Activity</span>
-            </button>
-            <button class="nav-item" onclick="switchView('viewSettings')">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v6m0 6v6"/><path d="m15.66 5.66-4.24 4.24m0 4.24-4.24 4.24"/></svg>
-                <span>Settings</span>
-            </button>
+            <!-- Copyright Footer -->
+            <div class="copyright">
+                Made with <span class="heart">✨</span> by Robin
+            </div>
         </div>
     </div>
 
@@ -1533,11 +1234,51 @@
     </div>
 
     <script>
+        // ============================================
+        // BACKGROUND IMAGE CONFIGURATION
+        // ============================================
+        // Ganti URL ini dengan link gambar kamu (PNG/JPG)
+        const BACKGROUND_IMAGE_URL = 'https://i.imgur.com/your-image.jpg'; // <-- GANTI INI
+        
+        // Atau kalau mau pakai random dari Unsplash:
+        // const BACKGROUND_IMAGE_URL = 'https://source.unsplash.com/random/1920x1080/?nature,abstract';
+        
+        // Set background image
+        function setBackgroundImage() {
+            const bgImage = document.getElementById('bgImage');
+            const bgOverlay = document.getElementById('bgOverlay');
+            const blobs = [
+                document.getElementById('blob1'),
+                document.getElementById('blob2'),
+                document.getElementById('blob3')
+            ];
+
+            if (BACKGROUND_IMAGE_URL && BACKGROUND_IMAGE_URL !== 'https://i.imgur.com/your-image.jpg') {
+                // Pakai custom background image
+                bgImage.style.backgroundImage = `url('${BACKGROUND_IMAGE_URL}')`;
+                bgOverlay.style.display = 'block';
+                
+                // Hide gradient blobs
+                blobs.forEach(blob => blob.style.display = 'none');
+            } else {
+                // Pakai gradient blobs (default)
+                bgImage.style.backgroundImage = 'none';
+                bgImage.style.backgroundColor = '#e8ecf1';
+                bgOverlay.style.display = 'none';
+                
+                // Show gradient blobs
+                blobs.forEach(blob => blob.style.display = 'block');
+            }
+        }
+
+        // Initialize background on page load
+        setBackgroundImage();
+
+        // ============================================
+        // REST OF THE CODE (SAME AS BEFORE)
+        // ============================================
         let currentAdminKey = '';
         let failedAttempts = 0;
-        let currentView = 'viewStats';
-        let allIPs = [];
-        let allLogs = [];
 
         const sassyMessages = [
             { title: "Wrong Password!", message: "That's not the right admin key. Try again!" },
@@ -1547,72 +1288,12 @@
             { title: "Come On!", message: "This is getting embarrassing now... 😬" }
         ];
 
-        // Update time
-        function updateTime() {
-            const now = new Date();
-            const timeString = now.toLocaleTimeString('en-US', { 
-                hour: '2-digit', 
-                minute: '2-digit'
-            });
-            const dateString = now.toLocaleDateString('en-US', { 
-                weekday: 'short', 
-                month: 'short', 
-                day: 'numeric' 
-            });
-            document.getElementById('currentTime').textContent = `${dateString}, ${timeString}`;
-        }
-
-        setInterval(updateTime, 1000);
-
-        // Navigation
-        function switchView(viewId) {
-            document.querySelectorAll('.view-section').forEach(section => {
-                section.classList.remove('active');
-            });
-            document.querySelectorAll('.nav-item').forEach(item => {
-                item.classList.remove('active');
-            });
-
-            document.getElementById(viewId).classList.add('active');
-            event.currentTarget.classList.add('active');
-            currentView = viewId;
-        }
-
-        // Refresh
-        function refreshData() {
-            const btn = document.getElementById('refreshBtn');
-            btn.classList.add('spinning');
-            loadData();
-            setTimeout(() => btn.classList.remove('spinning'), 1000);
-        }
-
-        // Search/Filter
-        function filterIPs() {
-            const search = document.getElementById('ipSearch').value.toLowerCase();
-            const filtered = allIPs.filter(ip => 
-                ip.ip_address.toLowerCase().includes(search) || 
-                (ip.notes && ip.notes.toLowerCase().includes(search))
-            );
-            displayIPs(filtered);
-        }
-
-        function filterLogs() {
-            const search = document.getElementById('logSearch').value.toLowerCase();
-            const filtered = allLogs.filter(log => 
-                log.ip_address.toLowerCase().includes(search) || 
-                log.action.toLowerCase().includes(search)
-            );
-            displayLogs(filtered);
-        }
-
-        // Session
         window.addEventListener('DOMContentLoaded', () => {
             const savedAdminKey = localStorage.getItem('adminKey');
             if (savedAdminKey) {
                 currentAdminKey = savedAdminKey;
                 autoLogin();
             }
-            updateTime();
         });
 
         async function autoLogin() {
@@ -1628,8 +1309,6 @@
                 if (data.success) {
                     document.getElementById('loginPage').style.display = 'none';
                     document.getElementById('dashboardPage').style.display = 'block';
-                    document.getElementById('bottomNav').style.display = 'block';
-                    document.getElementById('copyright').style.display = 'block';
                     loadData(data);
                 } else {
                     localStorage.removeItem('adminKey');
@@ -1695,8 +1374,6 @@
             failedAttempts = 0;
             
             document.getElementById('dashboardPage').style.display = 'none';
-            document.getElementById('bottomNav').style.display = 'none';
-            document.getElementById('copyright').style.display = 'none';
             document.getElementById('loginPage').style.display = 'flex';
             document.getElementById('adminKey').value = '';
             showLoginAlert('Logged out successfully!', 'success');
@@ -1726,8 +1403,6 @@
                     
                     document.getElementById('loginPage').style.display = 'none';
                     document.getElementById('dashboardPage').style.display = 'block';
-                    document.getElementById('bottomNav').style.display = 'block';
-                    document.getElementById('copyright').style.display = 'block';
                     document.getElementById('adminKey').value = '';
                     
                     showAlert('Welcome back! 🎉', 'success');
@@ -1738,69 +1413,6 @@
                 }
             } catch (error) {
                 showLoginAlert('Error: ' + error.message, 'error');
-            }
-        }
-
-        function displayIPs(ips) {
-            const ipListDiv = document.getElementById('ipList');
-            if (ips && ips.length > 0) {
-                ipListDiv.innerHTML = ips.map(ip => `
-                    <div class="ip-item">
-                        <div class="ip-info">
-                            <div class="ip-address">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
-                                ${ip.ip_address}
-                            </div>
-                            <div class="ip-meta">
-                                Added: ${new Date(ip.added_at).toLocaleString()}
-                                ${ip.notes ? `<br>Notes: ${ip.notes}` : ''}
-                            </div>
-                        </div>
-                        <button class="btn-danger" onclick="removeIp('${ip.ip_address}')">
-                            <span>Remove</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
-                        </button>
-                    </div>
-                `).join('');
-            } else {
-                ipListDiv.innerHTML = `
-                    <div class="empty-state">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
-                        <p>No IPs found</p>
-                    </div>
-                `;
-            }
-        }
-
-        function displayLogs(logs) {
-            const logsDiv = document.getElementById('logsList');
-            if (logs && logs.length > 0) {
-                logsDiv.innerHTML = logs.slice(0, 50).map(log => `
-                    <div class="log-item ${log.status === 'BLOCKED' ? 'blocked' : 'success'}">
-                        <div>
-                            <span class="log-action">${log.action}</span>
-                            <span style="color: rgba(255,255,255,0.6);"> - ${log.ip_address}</span>
-                            <span class="log-status ${log.status === 'ALLOWED' || log.status === 'ALLOWED_ALL' ? 'allowed' : 'blocked'}">
-                                ${log.status === 'ALLOWED' || log.status === 'ALLOWED_ALL' ? 
-                                    '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>' : 
-                                    '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" x2="9" y1="9" y2="15"/><line x1="9" x2="15" y1="9" y2="15"/></svg>'
-                                }
-                                ${log.status}
-                            </span>
-                        </div>
-                        <div class="log-time">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                            ${new Date(log.created_at).toLocaleString()}
-                        </div>
-                    </div>
-                `).join('');
-            } else {
-                logsDiv.innerHTML = `
-                    <div class="empty-state">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>
-                        <p>No logs found</p>
-                    </div>
-                `;
             }
         }
 
@@ -1822,50 +1434,71 @@
                     return;
                 }
 
-                // Store data
-                allIPs = data.ip_details || [];
-                allLogs = data.logs || [];
-
-                // Update stats
                 document.getElementById('totalIps').textContent = data.total || 0;
                 
-                const allowedCount = allLogs.filter(log => log.status === 'ALLOWED' || log.status === 'ALLOWED_ALL').length;
-                const blockedCount = allLogs.filter(log => log.status === 'BLOCKED').length;
+                const allowedCount = (data.logs || []).filter(log => log.status === 'ALLOWED' || log.status === 'ALLOWED_ALL').length;
+                const blockedCount = (data.logs || []).filter(log => log.status === 'BLOCKED').length;
                 
                 document.getElementById('allowedChecks').textContent = allowedCount;
                 document.getElementById('blockedChecks').textContent = blockedCount;
 
                 updateToggleStatus(data.allow_all || false);
 
-                // Display IPs
-                displayIPs(allIPs);
-
-                // Display Logs
-                displayLogs(allLogs);
-
-                // Update highlights
-                const highlightsDiv = document.getElementById('highlights');
-                if (allLogs && allLogs.length > 0) {
-                    const recentLogs = allLogs.slice(0, 3);
-                    highlightsDiv.innerHTML = recentLogs.map(log => `
-                        <div class="highlight-item">
-                            <div class="highlight-icon ${log.status === 'BLOCKED' ? 'danger' : 'success'}">
-                                ${log.status === 'BLOCKED' ? 
-                                    '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" x2="9" y1="9" y2="15"/><line x1="9" x2="15" y1="9" y2="15"/></svg>' :
-                                    '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>'
-                                }
+                const ipListDiv = document.getElementById('ipList');
+                if (data.ip_details && data.ip_details.length > 0) {
+                    ipListDiv.innerHTML = data.ip_details.map(ip => `
+                        <div class="ip-item">
+                            <div class="ip-info">
+                                <div class="ip-address">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+                                    ${ip.ip_address}
+                                </div>
+                                <div class="ip-meta">
+                                    Added: ${new Date(ip.added_at).toLocaleString()}
+                                    ${ip.notes ? `<br>Notes: ${ip.notes}` : ''}
+                                </div>
                             </div>
-                            <div class="highlight-info">
-                                <div class="highlight-title">${log.action} - ${log.ip_address}</div>
-                                <div class="highlight-desc">${new Date(log.created_at).toLocaleString()}</div>
+                            <button class="btn-danger" onclick="removeIp('${ip.ip_address}')">
+                                <span>Remove</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+                            </button>
+                        </div>
+                    `).join('');
+                } else {
+                    ipListDiv.innerHTML = `
+                        <div class="empty-state">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+                            <p>No IPs in whitelist yet</p>
+                        </div>
+                    `;
+                }
+
+                const logsDiv = document.getElementById('logsList');
+                if (data.logs && data.logs.length > 0) {
+                    logsDiv.innerHTML = data.logs.slice(0, 20).map(log => `
+                        <div class="log-item ${log.status === 'BLOCKED' ? 'blocked' : 'success'}">
+                            <div>
+                                <span class="log-action">${log.action}</span>
+                                <span style="color: #999;"> - ${log.ip_address}</span>
+                                <span class="log-status ${log.status === 'ALLOWED' || log.status === 'ALLOWED_ALL' ? 'allowed' : 'blocked'}">
+                                    ${log.status === 'ALLOWED' || log.status === 'ALLOWED_ALL' ? 
+                                        '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>' : 
+                                        '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" x2="9" y1="9" y2="15"/><line x1="9" x2="15" y1="9" y2="15"/></svg>'
+                                    }
+                                    ${log.status}
+                                </span>
+                            </div>
+                            <div class="log-time">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                                ${new Date(log.created_at).toLocaleString()}
                             </div>
                         </div>
                     `).join('');
                 } else {
-                    highlightsDiv.innerHTML = `
+                    logsDiv.innerHTML = `
                         <div class="empty-state">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>
-                            <p>No recent activity</p>
+                            <p>No activity logs yet</p>
                         </div>
                     `;
                 }
@@ -1946,30 +1579,46 @@
             const checkbox = document.getElementById('allowAllToggle');
             const allowAll = checkbox.checked;
 
+            console.log('[Toggle] Starting toggle with value:', allowAll);
+
             try {
+                const requestBody = { 
+                    allowAll: allowAll,
+                    adminKey: currentAdminKey 
+                };
+
+                console.log('[Toggle] Sending request:', requestBody);
+
                 const response = await fetch('/ips/toggle-all', {
                     method: 'POST',
                     headers: { 
                         'Content-Type': 'application/json',
                         'Accept': 'application/json'
                     },
-                    body: JSON.stringify({ 
-                        allowAll: allowAll,
-                        adminKey: currentAdminKey 
-                    })
+                    body: JSON.stringify(requestBody)
                 });
 
+                console.log('[Toggle] Response status:', response.status);
+
                 const data = await response.json();
+                console.log('[Toggle] Response data:', data);
 
                 if (data.success) {
-                    showAlert(`Allow all ${allowAll ? 'enabled' : 'disabled'}! ✨`, 'success');
+                    showAlert(
+                        `Allow all ${allowAll ? 'enabled' : 'disabled'}! ✨`, 
+                        'success'
+                    );
+                    
                     updateToggleStatus(allowAll);
+                    
                     setTimeout(() => loadData(), 500);
                 } else {
+                    console.error('[Toggle] Error from server:', data.message);
                     showAlert(data.message || 'Error toggling allow all', 'error');
                     updateToggleStatus(!allowAll);
                 }
             } catch (error) {
+                console.error('[Toggle] Exception:', error);
                 showAlert('Error: ' + error.message, 'error');
                 updateToggleStatus(!allowAll);
             }
