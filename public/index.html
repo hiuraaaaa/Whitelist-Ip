@@ -28,14 +28,16 @@
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
+            width: 100vw;
+            height: 100vh;
             z-index: 0;
             background-image: url('https://raw.githubusercontent.com/hiuraaaaa/media/main/bg-ip.jpg');
             background-size: cover;
-            background-position: center;
+            background-position: center center;
             background-repeat: no-repeat;
-            background-attachment: fixed;
+            will-change: transform;
+            transform: translateZ(0);
+            -webkit-transform: translateZ(0);
         }
 
         /* Dark overlay for better text readability */
@@ -48,6 +50,9 @@
             height: 100%;
             background: rgba(0, 0, 0, 0.5);
             z-index: 1;
+            will-change: transform;
+            transform: translateZ(0);
+            -webkit-transform: translateZ(0);
         }
 
         .blob {
@@ -1491,7 +1496,7 @@
 
     <!-- Copyright - FIXED -->
     <div class="copyright" id="copyright" style="display: none;">
-        Made with <span class="heart">❤️</span> by You
+        Made with <span class="heart">🥪</span> by Robin
     </div>
 
     <!-- Bottom Navigation -->
