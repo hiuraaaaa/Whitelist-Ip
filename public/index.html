@@ -132,7 +132,9 @@
         }
 
         .login-card {
-            background: rgba(15, 15, 30, 0.85);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
             padding: 40px 35px;
             border-radius: 20px;
             box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
@@ -141,6 +143,8 @@
             width: 100%;
             border: 1px solid rgba(255, 255, 255, 0.2);
             animation: fadeInUp 0.6s ease-out;
+            will-change: transform;
+            transform: translateZ(0);
         }
 
         @keyframes fadeInUp {
@@ -256,7 +260,9 @@
 
         /* Header */
         .dashboard-header {
-            background: rgba(15, 15, 30, 0.85);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
             padding: 18px 20px;
             margin-bottom: 15px;
             border-radius: 16px;
@@ -265,6 +271,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            will-change: transform;
+            transform: translateZ(0);
         }
 
         .header-left {
@@ -354,7 +362,6 @@
             font-size: 0.9em;
             animation: slideDown 0.3s ease;
             border: 2px solid transparent;
-            backdrop-filter: blur(10px);
         }
 
         .alert.success {
@@ -387,12 +394,15 @@
         /* Welcome Card */
         .welcome-card {
             background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
             padding: 25px;
             border-radius: 16px;
             margin-bottom: 15px;
             border: 1px solid rgba(255, 255, 255, 0.2);
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            will-change: transform;
+            transform: translateZ(0);
         }
 
         .welcome-header {
@@ -475,12 +485,15 @@
 
         .card {
             background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
             padding: 20px;
             border-radius: 16px;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
             border: 1px solid rgba(255, 255, 255, 0.2);
             margin-bottom: 15px;
+            will-change: transform;
+            transform: translateZ(0);
         }
 
         .card-header {
@@ -1035,14 +1048,18 @@
             left: 0;
             right: 0;
             text-align: center;
-            padding: 12px 15px;
-            font-size: 0.85em;
-            color: rgba(255, 255, 255, 0.7);
+            padding: 15px;
+            font-size: 0.9em;
+            color: rgba(255, 255, 255, 0.9);
             font-weight: 600;
-            background: rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(10px);
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.2);
             z-index: 99;
+            will-change: transform;
+            transform: translateZ(0);
         }
 
         .copyright .heart {
@@ -1063,12 +1080,15 @@
             bottom: 0;
             left: 0;
             right: 0;
-            background: rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(10px);
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.3);
             padding: 8px 0;
             z-index: 100;
+            will-change: transform;
+            transform: translateZ(0);
         }
 
         .nav-container {
@@ -1134,6 +1154,7 @@
             height: 100%;
             background: rgba(0, 0, 0, 0.8);
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             z-index: 1000;
             justify-content: center;
             align-items: center;
@@ -1145,7 +1166,8 @@
 
         .modal {
             background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             padding: 45px;
             border-radius: 20px;
             max-width: 450px;
@@ -1154,6 +1176,8 @@
             box-shadow: 0 25px 70px rgba(0, 0, 0, 0.5);
             border: 1px solid rgba(255, 255, 255, 0.2);
             animation: popIn 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            will-change: transform;
+            transform: translateZ(0);
         }
 
         @keyframes popIn {
